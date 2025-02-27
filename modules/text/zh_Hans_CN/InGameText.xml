@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Database>
+	<LocalizedText>
+		<Row Tag="LOC_PLOT_MOD_TCS_AGELESS" Language="zh_Hans_CN">
+			<Text>无时代限制</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_OBSOLETE" Language="zh_Hans_CN">
+			<Text>过时的</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_UNIQUE" Language="zh_Hans_CN">
+			<Text>独特</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_FULL_TILE" Language="zh_Hans_CN">
+			<Text>全地块</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_CONNECTED" Language="zh_Hans_CN">
+			<Text>连接到 ⇄</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TERRAIN_BIOME" Language="zh_Hans_CN">
+			<Text>{1_Terrain} {2_Biome}</Text>
+		</Row>	
+		<Row Tag="LOC_PLOT_MOD_TCS_FEATURE_RIVER" Language="zh_Hans_CN">
+			<Text>{1_Feature} • {2_River}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_VOLCANO" Language="zh_Hans_CN">
+			<Text>{1_Name} (Vulcano {2_Status})</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_UNNAMED_VOLCANO" Language="zh_Hans_CN">
+			<Text> {1_Status}座火山</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_DORMANT" Language="zh_Hans_CN">
+			<Text>休眠</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_ROUTE_FERRY" Language="zh_Hans_CN">
+			<Text>{1_Route} • 渡轮</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_COORDINATES" Language="zh_Hans_CN">
+			<Text>地块({1_X},{2_Y})</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_CONSTRUCTIBLE_NAME" Language="zh_Hans_CN">
+			<Text>{1_Name} {2_Tag}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_WILDERNESS" Language="zh_Hans_CN">
+			<Text>空地</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_RURAL" Language="zh_Hans_CN">
+			<Text>乡村</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_URBAN" Language="zh_Hans_CN">
+			<Text>城区</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_QUARTER" Language="zh_Hans_CN">
+			<Text>建筑</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_UNIQUE_QUARTER" Language="zh_Hans_CN">
+			<Text>{1_Adjective} 特色 建筑.</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_CITY_CENTER" Language="zh_Hans_CN">
+			<Text>市中心</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_WONDER" Language="zh_Hans_CN">
+			<Text>奇观</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_SPECIALIST_COUNT" Language="zh_Hans_CN">
+			<Text>有 {1_Count} / {2_Max}个专家</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_FORTIFIED_WALL" Language="zh_Hans_CN">
+			<Text>[b]防区[/b] ({1_CurrentHealth}/{2_MaxHealth} PF) • {3_Wall}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_FORTIFIED" Language="zh_Hans_CN">
+			<Text>[b]防区[/b] ({1_CurrentHealth}/{2_MaxHealth} PF)</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_DISTRICT_HEALTH" Language="zh_Hans_CN">
+			<Text>{1_CurrentHealth}/{2_MaxHealth} PF</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_UNITS" Language="zh_Hans_CN">
+			<Text>单位</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_CONSTRUCTIBLE_STATUS" Language="zh_Hans_CN">
+			<Text>{1_Constructible} {2_Status}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_POTENTIAL_IMPROVEMENT" Language="zh_Hans_CN">
+			<Text>[STYLE:text-2xs]改良:[/STYLE][N]{1_Name}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_VILLAGE" Language="zh_Hans_CN">
+			<Text>独立村庄</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOWN_GROWING" Language="zh_Hans_CN">
+			<Text>发展城镇</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOWN_SPECIALIZED" Language="zh_Hans_CN">
+			<Text>专业城镇</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOWN_FEEDING_PLURAL" Language="zh_Hans_CN">
+			<Text>供应 {1_Num} 个城市</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOWN_FEEDING_SINGULAR" Language="zh_Hans_CN">
+			<Text>供应 1 个城市</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_NOT_IN_TRADE_NETWORK" Language="zh_Hans_CN">
+			<Text>不在贸易网络中！</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_HAPPY" Language="zh_Hans_CN">
+			<Text>幸福</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_UNHAPPY" Language="zh_Hans_CN">
+			<Text>不满</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_ANGRY" Language="zh_Hans_CN">
+			<Text>愤怒</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_PLAGUE" Language="zh_Hans_CN">
+			<Text>瘟疫</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TRADE_ROUTES" Language="zh_Hans_CN">
+			<Text>{1_Current}/{2_Capacity} 活跃的贸易路线</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_RELATIONSHIP_ALLIANCE" Language="zh_Hans_CN">
+			<Text>({1_Status} 盟友)</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_RELATIONSHIP_WAR" Language="zh_Hans_CN">
+			<Text>(敌人)</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_RELATIONSHIP_VASSAL" Language="zh_Hans_CN">
+			<Text>(附庸)</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_YOURS" Language="zh_Hans_CN">
+			<Text>你的</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_FRESH_WATER" Language="zh_Hans_CN">
+			<Text>淡水</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_ORIGINAL_FOUNDER" Language="zh_Hans_CN">
+			<Text>由  {1_Name}  建立</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOTAL_YIELDS" Language="zh_Hans_CN">
+			<Text>总产出:</Text>
+		</Row>
+	</LocalizedText>
+</Database>

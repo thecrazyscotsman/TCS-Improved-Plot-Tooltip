@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Database>
+	<LocalizedText>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_NAME" Language="pl_PL">
+			<Text>TCS Improved Plot Tooltip</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_DESCRIPTION" Language="pl_PL">
+			<Text>Rozszerzenie informacji, które są przedstawiane przez grę w postaci dymków kontekstowych (wyświetlane po najechaniu kursorem myszy na obiekt).</Text>
+		</Row>
+	</LocalizedText>
+</Database>

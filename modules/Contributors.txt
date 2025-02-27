@@ -1,0 +1,12 @@
+The following CivFanatics users have contributed to this mod:
+
+	leonardify -> Italian localization
+	Webrok -> Russian localization
+	fulfom -> Japanese localization
+	thendye -> Chinese localization
+	alwdark -> Chinese (Traditional) localization
+	Klajwert -> Polish localization
+	Messiah360 -> Spanish localization
+	Fampat -> German localization
+
+Thank you!

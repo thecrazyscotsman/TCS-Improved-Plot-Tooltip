@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Database>
+	<LocalizedText>
+		<!-- Update these symbols if desired -->
+		<!-- Original symbols used: ∞ ⊗ ★ -->
+		<Replace Tag="LOC_PLOT_MOD_TCS_AGELESS" Language="ja_JP">
+			<Text>∞ 時代を問わない</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_OBSOLETE" Language="ja_JP">
+			<Text>⊗ 前時代的</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_UNIQUE" Language="ja_JP">
+			<Text>★ 固有</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_CONNECTED" Language="ja_JP">
+			<Text>接続 ⇄</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_FULL_TILE" Language="ja_JP">
+			<Text>タイル全体を占有</Text>
+		</Replace>
+		
+		<Replace Tag="LOC_PLOT_MOD_TCS_TERRAIN_BIOME" Language="ja_JP">
+			<Text>{1_Terrain} {2_Biome}</Text>
+		</Replace>	
+		<Replace Tag="LOC_PLOT_MOD_TCS_FEATURE_RIVER" Language="ja_JP">
+			<Text>{1_Feature} • {2_River}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_VOLCANO" Language="ja_JP">
+			<Text>{1_Name} ({2_Status}の火山)</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_UNNAMED_VOLCANO" Language="ja_JP">
+			<Text>{1_Status}の火山</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_DORMANT" Language="ja_JP">
+			<Text>{LOC_VOLCANO_NOT_ACTIVE}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_ROUTE_FERRY" Language="ja_JP">
+			<Text>{1_Route} • {LOC_NAVIGABLE_RIVER_FERRY}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_COORDINATES" Language="ja_JP">
+			<Text>Plot({1_X},{2_Y})</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_CONSTRUCTIBLE_NAME" Language="ja_JP">
+			<Text>{1_Name} {2_Tag}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_WILDERNESS" Language="ja_JP">
+			<Text>{LOC_DISTRICT_WILDERNESS_NAME}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_RURAL" Language="ja_JP">
+			<Text>{LOC_DISTRICT_RURAL_NAME}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_URBAN" Language="ja_JP">
+			<Text>{LOC_DISTRICT_URBAN_NAME}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_QUARTER" Language="ja_JP">
+			<Text>街区</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_UNIQUE_QUARTER" Language="ja_JP">
+			<Text>{1_Adjective}固有街区</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_CITY_CENTER" Language="ja_JP">
+			<Text>{LOC_DISTRICT_CITY_CENTER_NAME}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_WONDER" Language="ja_JP">
+			<Text>{LOC_DISTRICT_WONDER_NAME}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_SPECIALIST_COUNT" Language="ja_JP">
+			<Text>専門家 {1_Count} / {2_Max}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_FORTIFIED_WALL" Language="ja_JP">
+			<Text>[b]要塞化[/b] ({1_CurrentHealth}/{2_MaxHealth} HP) • {3_Wall}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_FORTIFIED" Language="ja_JP">
+			<Text>[b]要塞化[/b] ({1_CurrentHealth}/{2_MaxHealth} HP)</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_DISTRICT_HEALTH" Language="ja_JP">
+			<Text>{1_CurrentHealth}/{2_MaxHealth} HP</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_UNITS" Language="ja_JP">
+			<Text>ユニット</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_CONSTRUCTIBLE_STATUS" Language="ja_JP">
+			<Text>{1_Constructible} {2_Status}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_POTENTIAL_IMPROVEMENT" Language="ja_JP">
+			<Text>{1_Name}[STYLE:text-2xs]が建設可能[/STYLE][N]</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_VILLAGE" Language="ja_JP">
+			<Text>独立勢力</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_TOWN_GROWING" Language="ja_JP">
+			<Text>{LOC_UI_FOOD_CHOOSER_FOCUS_GROWTH}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_TOWN_SPECIALIZED" Language="ja_JP">
+			<Text>専業</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_TOWN_FEEDING_PLURAL" Language="ja_JP">
+			<Text>{1_Num}都市に食料を供給</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_TOWN_FEEDING_SINGULAR" Language="ja_JP">
+			<Text>1都市に食料を供給</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_NOT_IN_TRADE_NETWORK" Language="ja_JP">
+			<Text>交易網から外れている！</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_HAPPY" Language="ja_JP">
+			<Text>{LOC_UI_CITY_DETAILS_HAPPY}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_UNHAPPY" Language="ja_JP">
+			<Text>{LOC_UI_CITY_DETAILS_UNHAPPY}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_ANGRY" Language="ja_JP">
+			<Text>{LOC_UI_CITY_DETAILS_ANGRY}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_PLAGUE" Language="ja_JP">
+			<Text>{LOC_PLOTEFFECT_PLAGUE_NAME}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_TRADE_ROUTES" Language="ja_JP">
+			<Text>交易路: {1_Current}/{2_Capacity}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_CITY" Language="ja_JP">
+			<Text>[icon:YIELD_CITIES] {1_Name}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_TOWN" Language="ja_JP">
+			<Text>[icon:YIELD_TOWNS] {1_Name}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_FOOD_ICON_SENDING" Language="ja_JP">
+			<Text> [icon:YIELD_FOOD]</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_FOOD_ICON_RECEIVING" Language="ja_JP">
+			<Text> [icon:YIELD_FOOD]</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_RELATIONSHIP_ALLIANCE" Language="ja_JP">
+			<Text>({1_Status}{LOC_PLAYER_RELATIONSHIP_ALLIANCE})</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_RELATIONSHIP_WAR" Language="ja_JP">
+			<Text>({LOC_PLAYER_RELATIONSHIP_AT_WAR})</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_RELATIONSHIP_OPEN_BORDERS" Language="ja_JP">
+			<Text>({1_Name})</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_RELATIONSHIP_OTHER" Language="ja_JP">
+			<Text>({1_Status})</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_RELATIONSHIP_VASSAL" Language="ja_JP">
+			<Text>(あなたが宗主国)</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_TOP_UNIT" Language="ja_JP">
+			<Text>{1_Unit} ({2_Leader})</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_ADDITIONAL_UNITS" Language="ja_JP">
+			<Text>ほか+{1_Count}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_YOURS" Language="ja_JP">
+			<Text>あなた</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_MORE_INFO" Language="ja_JP">
+			<Text>+ + +</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_DISTANT_LANDS" Language="ja_JP">
+			<Text>(遠隔地)</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_FRESH_WATER" Language="ja_JP">
+			<Text>{LOC_PLOTKEY_FRESHWATER}</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_ORIGINAL_FOUNDER" Language="ja_JP">
+			<Text>{1_Name}が開拓</Text>
+		</Replace>
+		<Replace Tag="LOC_PLOT_MOD_TCS_TOTAL_YIELDS" Language="ja_JP">
+			<Text>総産出量:</Text>
+		</Replace>
+	</LocalizedText>
+</Database>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Database>
+	<LocalizedText>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_NAME" Language="zh_Hans_CN">
+			<Text>地块详细信息</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>地块详细信息详细信息展示.</Text>
+		</Row>
+	</LocalizedText>
+</Database>

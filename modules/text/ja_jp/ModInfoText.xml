@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Database>
+	<LocalizedText>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_NAME" Language="ja_JP">
+			<Text>TCS Improved Plot Tooltip</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_DESCRIPTION" Language="ja_JP">
+			<Text>生産ツールチップを様々な点で改善します。</Text>
+		</Row>
+	</LocalizedText>
+</Database>

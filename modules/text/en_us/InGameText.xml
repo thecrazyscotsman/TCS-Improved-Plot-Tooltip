@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Database>
+	<EnglishText>
+		<Row Tag="LOC_PLOT_MOD_TCS_AGELESS">
+			<Text>Ageless</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_OBSOLETE">
+			<Text>Obsolete</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_UNIQUE">
+			<Text>Unique</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_FULL_TILE">
+			<Text>Full Tile</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_CONNECTED">
+			<Text>Connections ⇄</Text>
+		</Row>
+		
+		<Row Tag="LOC_PLOT_MOD_TCS_TERRAIN_BIOME">
+			<Text>{1_Terrain} {2_Biome}</Text>
+		</Row>	
+		<Row Tag="LOC_PLOT_MOD_TCS_FEATURE_RIVER">
+			<Text>{1_Feature} • {2_River}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_VOLCANO">
+			<Text>{1_Name} ({2_Status} Volcano)</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_UNNAMED_VOLCANO">
+			<Text>{1_Status} Volcano</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_DORMANT">
+			<Text>Dormant</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_ROUTE_FERRY">
+			<Text>{1_Route} • Ferry</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_COORDINATES">
+			<Text>Plot({1_X},{2_Y})</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_CONSTRUCTIBLE_NAME">
+			<Text>{1_Name} {2_Tag}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_WILDERNESS">
+			<Text>Wilderness</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_RURAL">
+			<Text>Rural</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_URBAN">
+			<Text>Urban</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_QUARTER">
+			<Text>Quarter</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_UNIQUE_QUARTER">
+			<Text>{1_Adjective} Unique Quarter.</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_CITY_CENTER">
+			<Text>City Center</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_WONDER">
+			<Text>Wonder</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_SPECIALIST_COUNT">
+			<Text>Has {1_Count} of {2_Max} Possible Specialists</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_FORTIFIED_WALL">
+			<Text>[b]Fortified[/b] ({1_CurrentHealth}/{2_MaxHealth} HP) • {3_Wall}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_FORTIFIED">
+			<Text>[b]Fortified[/b] ({1_CurrentHealth}/{2_MaxHealth} HP)</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_DISTRICT_HEALTH">
+			<Text>{1_CurrentHealth}/{2_MaxHealth} HP</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_UNITS">
+			<Text>Units</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_CONSTRUCTIBLE_STATUS">
+			<Text>{1_Constructible} {2_Status}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_POTENTIAL_IMPROVEMENT">
+			<Text>[STYLE:text-2xs]Improved with:[/STYLE][N]{1_Name}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_VILLAGE">
+			<Text>Independent Village</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOWN_GROWING">
+			<Text>Growing Town</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOWN_SPECIALIZED">
+			<Text>Specialized Town</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOWN_FEEDING_PLURAL">
+			<Text>Feeding {1_Num} Cities</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOWN_FEEDING_SINGULAR">
+			<Text>Feeding 1 City</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_NOT_IN_TRADE_NETWORK">
+			<Text>Not in Trade Network!</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_HAPPY">
+			<Text>Happy</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_UNHAPPY">
+			<Text>Unhappy</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_ANGRY">
+			<Text>Angry</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_PLAGUE">
+			<Text>Plague</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TRADE_ROUTES">
+			<Text>{1_Current}/{2_Capacity} Trade Routes Active</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_CITY">
+			<Text>[icon:YIELD_CITIES] {1_Name}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOWN">
+			<Text>[icon:YIELD_TOWNS] {1_Name}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_FOOD_ICON_SENDING">
+			<Text> [icon:YIELD_FOOD]</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_FOOD_ICON_RECEIVING">
+			<Text> [icon:YIELD_FOOD]</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_RELATIONSHIP_ALLIANCE">
+			<Text>({1_Status} Ally)</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_RELATIONSHIP_WAR">
+			<Text>(Enemy)</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_RELATIONSHIP_OPEN_BORDERS">
+			<Text>({1_Name})</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_RELATIONSHIP_OTHER">
+			<Text>({1_Status})</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_RELATIONSHIP_VASSAL">
+			<Text>(Vassal)</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOP_UNIT">
+			<Text>{1_Unit} • {2_Leader}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_ADDITIONAL_UNITS">
+			<Text>+{1_Count} more</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_YOURS">
+			<Text>Yours</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_MORE_INFO">
+			<Text>+ + +</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_DISTANT_LANDS">
+			<Text>(Distant Lands)</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_FRESH_WATER">
+			<Text>Fresh Water</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_ORIGINAL_FOUNDER">
+			<Text>Founded by {1_Name}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOTAL_YIELDS">
+			<Text>Total Yields:</Text>
+		</Row>
+	</EnglishText>
+</Database>

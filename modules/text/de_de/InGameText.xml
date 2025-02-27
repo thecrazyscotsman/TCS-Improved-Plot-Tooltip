@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Database>
+	<LocalizedText>
+		<Row Tag="LOC_PLOT_MOD_TCS_AGELESS" Language="de_DE">
+			<Text>Zeitlos</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_OBSOLETE" Language="de_DE">
+			<Text>Obsolet</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_UNIQUE" Language="de_DE">
+			<Text>Einzigartig</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_FULL_TILE" Language="de_DE">
+			<Text>Ganzes Feld</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_CONNECTED" Language="de_DE">
+			<Text>Verbindungen ⇄</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TERRAIN_BIOME" Language="de_DE">
+			<Text>{1_Terrain} {2_Biome}</Text>
+		</Row>	
+		<Row Tag="LOC_PLOT_MOD_TCS_FEATURE_RIVER" Language="de_DE">
+			<Text>{1_Feature} • {2_River}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_VOLCANO" Language="de_DE">
+			<Text>{1_Name} (Vulkan {2_Status})</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_UNNAMED_VOLCANO" Language="de_DE">
+			<Text>Vulkan {1_Status}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_DORMANT" Language="de_DE">
+			<Text>Ruhend</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_ROUTE_FERRY" Language="de_DE">
+			<Text>{1_Route} • Fähre</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_COORDINATES" Language="de_DE">
+			<Text>Feld({1_X},{2_Y})</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_CONSTRUCTIBLE_NAME" Language="de_DE">
+			<Text>{1_Name} {2_Tag}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_WILDERNESS" Language="de_DE">
+			<Text>Geländefeld</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_RURAL" Language="de_DE">
+			<Text>Ländlich</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_URBAN" Language="de_DE">
+			<Text>Vorstadt</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_QUARTER" Language="de_DE">
+			<Text>Stadtviertel</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_UNIQUE_QUARTER" Language="de_DE">
+			<Text>{1_Adjective} Einziartiges Stadtviertel.</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_CITY_CENTER" Language="de_DE">
+			<Text>Stadtzentrum</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_WONDER" Language="de_DE">
+			<Text>Wunder</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_SPECIALIST_COUNT" Language="de_DE">
+			<Text>Hat {1_Count} von {2_Max} möglichen Spezialisten</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_FORTIFIED_WALL" Language="de_DE">
+			<Text>[b]Befestigt[/b] ({1_CurrentHealth}/{2_MaxHealth} TP) • {3_Wall}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_FORTIFIED" Language="de_DE">
+			<Text>[b]Befestigt[/b] ({1_CurrentHealth}/{2_MaxHealth} TP)</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_DISTRICT_HEALTH" Language="de_DE">
+			<Text>{1_CurrentHealth}/{2_MaxHealth} TP</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_UNITS" Language="de_DE">
+			<Text>Einheiten</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_CONSTRUCTIBLE_STATUS" Language="de_DE">
+			<Text>{1_Constructible} {2_Status}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_POTENTIAL_IMPROVEMENT" Language="de_DE">
+			<Text>[STYLE:text-2xs]Ausgebaubar mit:[/STYLE][N]{1_Name}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_VILLAGE" Language="de_DE">
+			<Text>Unabhängige Gemeinde</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOWN_GROWING" Language="de_DE">
+			<Text>Wachsende Gemeinde</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOWN_SPECIALIZED" Language="de_DE">
+			<Text>Spezialisierte Gemeinde</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOWN_FEEDING_PLURAL" Language="de_DE">
+			<Text>Nahrungslieferant für {1_Num} Städte</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOWN_FEEDING_SINGULAR" Language="de_DE">
+			<Text>Nahrungslieferant für 1 Stadt</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_NOT_IN_TRADE_NETWORK" Language="de_DE">
+			<Text>Nicht im Handelsnetz!</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_HAPPY" Language="de_DE">
+			<Text>Zufrieden</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_UNHAPPY" Language="de_DE">
+			<Text>Unzufrieden</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_ANGRY" Language="de_DE">
+			<Text>Wütend</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_PLAGUE" Language="de_DE">
+			<Text>Krankheit</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TRADE_ROUTES" Language="de_DE">
+			<Text>{1_Current}/{2_Capacity} Handelswege aktiv</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_RELATIONSHIP_ALLIANCE" Language="de_DE">
+			<Text>({1_Status} Alliierter)</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_RELATIONSHIP_WAR" Language="de_DE">
+			<Text>(Feind)</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_ADDITIONAL_UNITS" Language="de_DE">
+			<Text>+{1_Count} mehr</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_DISTANT_LANDS" Language="de_DE">
+			<Text>(Ferne Länder)</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_RELATIONSHIP_VASSAL" Language="de_DE">
+			<Text>(Vasalle)</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_YOURS" Language="de_DE">
+			<Text>Ihr</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_FRESH_WATER" Language="de_DE">
+			<Text>Süßwasser</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_ORIGINAL_FOUNDER" Language="de_DE">
+			<Text>Gegründet durch {1_Name}</Text>
+		</Row>
+		<Row Tag="LOC_PLOT_MOD_TCS_TOTAL_YIELDS" Language="de_DE">
+			<Text>Gesamtertrag:</Text>
+		</Row>
+	</LocalizedText>
+</Database>

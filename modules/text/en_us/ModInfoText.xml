@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Database>
+	<EnglishText>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_NAME">
+			<Text>TCS Improved Plot Tooltip</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_DESCRIPTION">
+			<Text>Various improvements to the plot tooltip.</Text>
+		</Row>
+	</EnglishText>
+</Database>

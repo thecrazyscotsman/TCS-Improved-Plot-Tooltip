@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="tcs-ui-improved-plot-tooltip" version="15"
+	xmlns="ModInfo">
+	<Properties>
+		<Name>LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_NAME</Name>
+		<Description>LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_DESCRIPTION</Description>
+		<Authors>thecrazyscotsman</Authors>
+		<Package>Mod</Package>
+		<AffectsSavedGames>0</AffectsSavedGames>
+	</Properties>
+	<Dependencies>
+		<Mod id="base-standard" title="LOC_MODULE_BASE_STANDARD_NAME" />
+	</Dependencies>
+	<ActionCriteria>
+		<Criteria id="always">
+			<AlwaysMet></AlwaysMet>
+		</Criteria>
+	</ActionCriteria>
+	<ActionGroups>
+		<ActionGroup id="game-tcs-ui-improved-plot-tooltip" scope="game" criteria="always">
+			<Properties>
+				<LoadOrder>1001</LoadOrder>
+			</Properties>
+			<Actions>
+				<ImportFiles>
+					<Item>ui/tooltips/plot-tooltip.js</Item>
+				</ImportFiles>
+				<UpdateText>
+					<Item>text/en_us/InGameText.xml</Item>
+					<Item locale="it_IT">text/it_it/InGameText.xml</Item>
+					<Item locale="ja_JP">text/ja_jp/InGameText.xml</Item>
+					<Item locale="pl_PL">text/pl_pl/InGameText.xml</Item>
+					<Item locale="ru_RU">text/ru_ru/InGameText.xml</Item>
+					<Item locale="es_ES">text/es_es/InGameText.xml</Item>
+					<Item locale="de_DE">text/de_de/InGameText.xml</Item>
+					<Item locale="zh_Hans_CN">text/zh_Hans_CN/InGameText.xml</Item>
+					<Item locale="zh_Hant_HK">text/zh_Hant_HK/InGameText.xml</Item>
+				</UpdateText>
+			</Actions>
+		</ActionGroup>
+	</ActionGroups>
+	<LocalizedText>
+		<File>text/en_us/ModInfoText.xml</File>
+		<File>text/it_it/ModInfoText.xml</File>
+		<File>text/ja_jp/ModInfoText.xml</File>
+		<File>text/pl_pl/ModInfoText.xml</File>
+		<File>text/ru_ru/ModInfoText.xml</File>
+		<File>text/es_es/ModInfoText.xml</File>
+		<File>text/de_de/ModInfoText.xml</File>
+		<File>text/zh_Hans_CN/ModInfoText.xml</File>
+	</LocalizedText>
+</Mod>
