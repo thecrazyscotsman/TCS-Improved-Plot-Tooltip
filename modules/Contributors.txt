@@ -8,5 +8,6 @@ The following CivFanatics users have contributed to this mod:
 	Klajwert -> Polish localization
 	Messiah360 -> Spanish localization
 	Fampat -> German localization
+	Gusjeon -> Korean localization
 
 Thank you!

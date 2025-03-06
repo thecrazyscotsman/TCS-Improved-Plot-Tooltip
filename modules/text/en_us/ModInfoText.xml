@@ -7,5 +7,14 @@
 		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_DESCRIPTION">
 			<Text>Various improvements to the plot tooltip.</Text>
 		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_COMPATIBILITY">
+			<Text>Compatible with [B]Sukritact's Simple UI Adjustments[/B], incompatible with other mods which change the plot tooltip.</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_THANKS">
+			<Text>leonardify, Webrok, fulfom, thendye, alwdark, Klajwert, Messiah360, Fampat, Gusjeon from Civfanatics for localization contributions.</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_URL">
+			<Text>https://forums.civfanatics.com/resources/tcs-improved-plot-tooltip.31859/</Text>
+		</Row>
 	</EnglishText>
 </Database>

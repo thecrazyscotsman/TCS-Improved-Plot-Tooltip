@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Mod id="tcs-ui-improved-plot-tooltip" version="15"
+<Mod id="tcs-ui-improved-plot-tooltip" version="16"
 	xmlns="ModInfo">
 	<Properties>
 		<Name>LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_NAME</Name>
@@ -7,6 +7,10 @@
 		<Authors>thecrazyscotsman</Authors>
 		<Package>Mod</Package>
 		<AffectsSavedGames>0</AffectsSavedGames>
+		<SpecialThanks>LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_THANKS</SpecialThanks>
+		<Compatibility>LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_COMPATIBILITY</Compatibility>
+		<URL>LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_URL</URL>
+		<Version>16</Version>
 	</Properties>
 	<Dependencies>
 		<Mod id="base-standard" title="LOC_MODULE_BASE_STANDARD_NAME" />
@@ -35,6 +39,23 @@
 					<Item locale="de_DE">text/de_de/InGameText.xml</Item>
 					<Item locale="zh_Hans_CN">text/zh_Hans_CN/InGameText.xml</Item>
 					<Item locale="zh_Hant_HK">text/zh_Hant_HK/InGameText.xml</Item>
+					<Item locale="ko_KR">text/ko_kr/InGameText.xml</Item>
+				</UpdateText>
+			</Actions>
+		</ActionGroup>
+		<ActionGroup id="shell-tcs-ui-improved-plot-tooltip" scope="shell" criteria="always">
+			<Actions>
+				<UpdateText>
+					<Item>text/en_us/ModInfoText.xml</Item>
+					<Item locale="it_IT">text/it_it/ModInfoText.xml</Item>
+					<Item locale="ja_JP">text/ja_jp/ModInfoText.xml</Item>
+					<Item locale="pl_PL">text/pl_pl/ModInfoText.xml</Item>
+					<Item locale="ru_RU">text/ru_ru/ModInfoText.xml</Item>
+					<Item locale="es_ES">text/es_es/ModInfoText.xml</Item>
+					<Item locale="de_DE">text/de_de/ModInfoText.xml</Item>
+					<Item locale="zh_Hans_CN">text/zh_Hans_CN/ModInfoText.xml</Item>
+					<Item locale="zh_Hant_HK">text/zh_Hant_HK/ModInfoText.xml</Item>
+					<Item locale="ko_KR">text/ko_kr/ModInfoText.xml</Item>
 				</UpdateText>
 			</Actions>
 		</ActionGroup>
@@ -48,5 +69,6 @@
 		<File>text/es_es/ModInfoText.xml</File>
 		<File>text/de_de/ModInfoText.xml</File>
 		<File>text/zh_Hans_CN/ModInfoText.xml</File>
+		<File>text/ko_kr/ModInfoText.xml</File>
 	</LocalizedText>
 </Mod>
