@@ -22,6 +22,36 @@
 	import { TradeRoute } from '/core/ui/utilities/utilities-data.js';
 	import CityDetails, { UpdateCityDetailsEventName } from "/base-standard/ui/city-details/model-city-details.js";
 	import { InterfaceMode } from '/core/ui/interface-modes/interface-modes.js';
+
+	// Warning Banners
+	const TCS_BORDER_WIDTH = "0.1111111111rem";
+	const TCS_MARGIN_SIDE = `calc(${TCS_BORDER_WIDTH} - var(--padding-left-right))`;
+	const TCS_PADDING_SIDE = `calc(var(--padding-left-right) - ${TCS_BORDER_WIDTH})`;
+	const TCS_MARGIN_TOP = `calc(${TCS_BORDER_WIDTH} - var(--padding-top-bottom))`;
+	const TCS_PADDING_TOP = `calc(var(--padding-top-bottom) - ${TCS_BORDER_WIDTH})`;
+	const TCS_WARNING_BACKGROUND_COLOR = '#3a0806';
+	const TCS_WARNING_BANNER_PROPERTIES = [
+		['flex-direction','column'],
+		['--padding-top-bottom', '0.2222222222rem'],
+		['margin-left', TCS_MARGIN_SIDE],
+		['margin-right', TCS_MARGIN_SIDE],
+		['margin-top', TCS_MARGIN_TOP],
+		['margin-bottom', TCS_MARGIN_TOP],
+		['padding-top', TCS_PADDING_TOP],
+		['padding-bottom', TCS_PADDING_TOP],
+		['padding-left', TCS_PADDING_SIDE],
+		['padding-right', TCS_PADDING_SIDE],
+		['background-color', TCS_WARNING_BACKGROUND_COLOR]
+	];
+	/*
+	margin-left: calc(-1 * var(--padding-left-right));
+	margin-right: calc(-1 * var(--padding-left-right));
+	padding-top: var(--padding-top-bottom);
+	padding-bottom: var(--padding-top-bottom);
+	padding-left: var(--padding-left-right);
+	padding-right: var(--padding-left-right);
+	*/
+
 	class PlotTooltipType {
 		constructor() {
 			this.plotCoord = null;
@@ -321,7 +351,15 @@
 				}
 			});
 
-			// Add specialist info
+			this.yieldsFlexbox.appendChild(fragment);
+			// Give all the yields extra room if one of them has extra digits, to keep the spacing even.
+			this.yieldsFlexbox.classList.remove('resourcesFlex--double-digits', 'resourcesFlex--triple-digits');
+			if (maxValueLength > 2) {
+				this.yieldsFlexbox.classList.add(maxValueLength > 3 ? 'resourcesFlex--triple-digits' : 'resourcesFlex--double-digits');
+			}
+			
+			// Get Specialist info
+			let workerString;
 			if (plotObject.OwningPlayerID == plotObject.LocalPlayerID && plotObject.City && plotObject.District && (plotObject.District.type == DistrictTypes.URBAN || plotObject.District.type == DistrictTypes.CITY_CENTER)) {
 				if (!plotObject.City.isTown) {
 					const numWorkerSlots = plotObject.City.Workers.getCityWorkerCap();
@@ -331,45 +369,105 @@
 							const plot = cityPlots.find(p => p.PlotIndex == plotObject.PlotIndex);
 							if (plot) {
 								const numWorkers = plot.NumWorkers;
-								const workerString = (numWorkerSlots == numWorkers) ? numWorkers : (numWorkers + "/" + numWorkerSlots);
-
-								const tooltipIndividualYieldFlex = document.createElement("div");
-								tooltipIndividualYieldFlex.setAttribute('justify-content', 'flex-end');
-								tooltipIndividualYieldFlex.classList.add("plot-tooltip__IndividualYieldFlex");
-								//tooltipIndividualYieldFlex.ariaLabel = `${Locale.toNumber()} ${Locale.compose(yield_define.Name)}`;
-								fragment.appendChild(tooltipIndividualYieldFlex);
-								const yieldIconCSS = UI.getIconCSS("CITY_SPECIAL_BASE");
-								const yieldIconShadow = document.createElement("div");
-								yieldIconShadow.classList.add("plot-tooltip__IndividualYieldIcons-Shadow");
-								yieldIconShadow.style.backgroundImage = yieldIconCSS;
-								tooltipIndividualYieldFlex.appendChild(yieldIconShadow);
-								const yieldIcon = document.createElement("div");
-								yieldIcon.classList.add("plot-tooltip__IndividualYieldIcons");
-								yieldIcon.style.backgroundImage = yieldIconCSS;
-								yieldIconShadow.appendChild(yieldIcon);
-								const toolTipIndividualYieldValues = document.createElement("div");
-								toolTipIndividualYieldValues.classList.add("plot-tooltip__IndividualYieldValues");
-								const value = workerString;
-								toolTipIndividualYieldValues.textContent = value;
-								tooltipIndividualYieldFlex.appendChild(toolTipIndividualYieldValues);
+								workerString = (numWorkerSlots == numWorkers) ? numWorkers : (numWorkers + "/" + numWorkerSlots);
 							}
 						}
 					}
 				}
 			}
 
+			// Build total yields and specialist box
+			if (totalYields > 0 || workerString) {
+				const iconProperties = [
+					['position', 'relative'],
+					['background-size', 'contain'],
+					['background-repeat', 'no-repeat'],
+					['align-content', 'center'],
+					['width', '0.92rem'],
+					['height', '0.92rem'],
+					['margin-right', '0.2666667rem'],
+					['margin-top', '0.1rem']
+				]
 
-			this.yieldsFlexbox.appendChild(fragment);
-			// Give all the yields extra room if one of them has extra digits, to keep the spacing even.
-			this.yieldsFlexbox.classList.remove('resourcesFlex--double-digits', 'resourcesFlex--triple-digits');
-			if (maxValueLength > 2) {
-				this.yieldsFlexbox.classList.add(maxValueLength > 3 ? 'resourcesFlex--triple-digits' : 'resourcesFlex--double-digits');
-			}
-			if (totalYields > 0) {
-				const plotTooltipTotalYields = document.createElement("div");
-				plotTooltipTotalYields.classList.add('text-2xs', 'text-center');
-				plotTooltipTotalYields.innerHTML = Locale.compose("LOC_PLOT_MOD_TCS_TOTAL_YIELDS") + " " + totalYields;
-				this.container.appendChild(plotTooltipTotalYields);
+				const additionalYieldInfo = document.createElement("div");
+				additionalYieldInfo?.style.setProperty('position', 'relative');
+				additionalYieldInfo?.style.setProperty('display', 'flex');
+				additionalYieldInfo?.style.setProperty('flex-direction', 'row');
+				additionalYieldInfo?.style.setProperty('justify-content', 'center');
+				additionalYieldInfo?.style.setProperty('width', '100%');
+				//additionalYieldInfo?.style.setProperty('background-color', 'rgba(18, 88, 43, 0.8)');
+				
+				if (totalYields > 0) {
+					const subContainer = document.createElement("div");
+					subContainer?.style.setProperty('display', 'flex');
+					subContainer?.style.setProperty('flex-direction', 'row');
+					subContainer?.style.setProperty('justify-content', 'flex-start');
+					const totalYieldsIconCSS = UI.getIconCSS("CITY_RURAL");
+					// Background shadow
+					const totalYieldsIconShadow = document.createElement("div");
+					totalYieldsIconShadow.style.backgroundImage = totalYieldsIconCSS;
+					totalYieldsIconShadow?.style.setProperty('transform', 'translate(-0.1111111111rem, 0.1111111111rem)');
+					totalYieldsIconShadow?.style.setProperty('fxs-background-image-tint', 'black');
+					iconProperties.forEach(p => {
+						totalYieldsIconShadow?.style.setProperty(p[0], p[1]);
+					});
+
+					// Icon
+					const totalYieldsIcon = document.createElement("div");
+					totalYieldsIcon?.style.setProperty('transform', 'translate(0.1111111111rem, -0.1111111111rem)');
+					iconProperties.forEach(p => {
+						totalYieldsIcon?.style.setProperty(p[0], p[1]);
+					});
+					totalYieldsIcon.style.backgroundImage = totalYieldsIconCSS;
+
+					// Text
+					const totalYieldsText = document.createElement("div");
+					totalYieldsText.classList.add('text-xs');
+					totalYieldsText?.style.setProperty('font-weight', '500');
+					totalYieldsText.setAttribute('data-l10n-id', totalYields);
+
+					totalYieldsIconShadow.appendChild(totalYieldsIcon);
+					subContainer.appendChild(totalYieldsIconShadow);
+					subContainer.appendChild(totalYieldsText);
+					additionalYieldInfo.appendChild(subContainer);
+				}
+
+				if (workerString) {
+					const subContainer = document.createElement("div");
+					subContainer?.style.setProperty('display', 'flex');
+					subContainer?.style.setProperty('flex-direction', 'row');
+					subContainer?.style.setProperty('justify-content', 'flex-start');
+					const specialistsIconCSS = UI.getIconCSS("CITY_SPECIAL_BASE");
+					// Background shadow
+					const specialistsIconShadow = document.createElement("div");
+					specialistsIconShadow.style.backgroundImage = specialistsIconCSS;
+					specialistsIconShadow?.style.setProperty('transform', 'translate(-0.1111111111rem, 0.1111111111rem)');
+					specialistsIconShadow?.style.setProperty('fxs-background-image-tint', 'black');
+					specialistsIconShadow?.style.setProperty('margin-left', '0.75rem'); //extra margin for the specialist icon to space it from the total yields divs
+					iconProperties.forEach(p => {
+						specialistsIconShadow?.style.setProperty(p[0], p[1]);
+					});
+
+					// Icon
+					const specialistsIcon = document.createElement("div");
+					specialistsIcon?.style.setProperty('transform', 'translate(0.1111111111rem, -0.1111111111rem)');
+					iconProperties.forEach(p => {
+						specialistsIcon?.style.setProperty(p[0], p[1]);
+					});
+					specialistsIcon.style.backgroundImage = specialistsIconCSS;
+
+					// Text
+					const specialistsText = document.createElement("div");
+					specialistsText.classList.add('text-xs');
+					specialistsText?.style.setProperty('font-weight', '500');
+					specialistsText.setAttribute('data-l10n-id', workerString);
+
+					specialistsIconShadow.appendChild(specialistsIcon);
+					subContainer.appendChild(specialistsIconShadow);
+					subContainer.appendChild(specialistsText);
+					additionalYieldInfo.appendChild(subContainer);
+				}
+				this.container.appendChild(additionalYieldInfo);
 			}
 		}
 		addResource(plotObject) {
@@ -383,11 +481,32 @@
 				const toolTipResourceContainer = document.createElement('div');
 				toolTipResourceContainer.classList.add('plot-tooltip__resource-container');
 				
-				const toolTipResourceLargeIcon = document.createElement("div");
-				toolTipResourceLargeIcon.classList.add("plot-tooltip__large-resource-icon");
 				const toolTipResourceIconCSS = UI.getIconCSS(hexResource.ResourceType);
-				toolTipResourceLargeIcon.style.backgroundImage = toolTipResourceIconCSS;
-				toolTipResourceContainer.appendChild(toolTipResourceLargeIcon);
+
+				// Background shadow
+				const resourceIconShadow = document.createElement("div");
+				resourceIconShadow.style.backgroundImage = toolTipResourceIconCSS;
+				resourceIconShadow?.style.setProperty('position', 'relative');
+				resourceIconShadow?.style.setProperty('transform', 'translate(-0.1111111111rem, 0.1111111111rem)');
+				resourceIconShadow?.style.setProperty('background-size', 'contain');
+				resourceIconShadow?.style.setProperty('background-repeat', 'no-repeat');
+				resourceIconShadow?.style.setProperty('fxs-background-image-tint', 'black');
+				resourceIconShadow?.style.setProperty('width', '2.6666666667rem');
+				resourceIconShadow?.style.setProperty('height', '2.6666666667rem');
+				resourceIconShadow?.style.setProperty('margin-right', '0.6666666667rem');
+
+				// Icon
+				const resourceIcon = document.createElement("div");
+				resourceIcon?.style.setProperty('position', 'relative');
+				resourceIcon?.style.setProperty('transform', 'translate(0.1111111111rem, -0.1111111111rem)');
+				resourceIcon?.style.setProperty('background-size', 'contain');
+				resourceIcon?.style.setProperty('background-repeat', 'no-repeat');
+				resourceIcon?.style.setProperty('width', '2.6666666667rem');
+				resourceIcon?.style.setProperty('height', '2.6666666667rem');
+				resourceIcon.style.backgroundImage = toolTipResourceIconCSS;
+
+				resourceIconShadow.appendChild(resourceIcon);
+				toolTipResourceContainer.appendChild(resourceIconShadow);
 				
 				const toolTipResourceDetails = document.createElement('div');
 				toolTipResourceDetails.classList.add('plot-tooltip__resource-details');
@@ -401,14 +520,13 @@
 				toolTipResourceDetails.appendChild(toolTipResourceDescription);
 				toolTipResourceContainer.appendChild(toolTipResourceDetails);
 				
-				this.container.appendChild(toolTipResourceContainer);
+				this.container.appendChild(toolTipResourceContainer);	
 			}
 		}
 		addConstructibles(plotObject) {
 			
 			/*
 			district (rural/urban/quarter/wonder)
-			specialists
 			constructibles (improvements/buildings)
 			fortifications
 			*/
@@ -430,27 +548,7 @@
 			// Get player info
 			const playerID = plotObject.OwningPlayerID;
 			const player = plotObject.OwningPlayer;
-			
-			// Get city & specialist Info
-			/*
-			const city = plotObject.City;
-			let numWorkers = undefined;
-			let numWorkerSlots = undefined;
-			if (city && !city.isTown) {
-				if (district && (district.type == DistrictTypes.URBAN || district.type == DistrictTypes.CITY_CENTER)) {
-					numWorkerSlots = city.Workers.getCityWorkerCap();
-					const cityPlots = city.Workers.GetAllPlacementInfo();
-					if (cityPlots) {
-						for (const plot of cityPlots) {
-							if (plot.PlotIndex == plotObject.PlotIndex) {
-								numWorkers = plot.NumWorkers;
-								break;						
-							}
-						}
-					}
-				}	
-			}*/
-			
+						
 			// Collect and sort constructibles
 			constructibles.forEach((item) => {
 				const instance = Constructibles.getByComponentID(item);
@@ -605,7 +703,7 @@
 						//toolTipWonderDetails.classList.add("plot-tooltip__resource-label_description");
 						toolTipQuarterDetails.classList.add("plot-tooltip__owner-civ-text", "justify-center");
 						toolTipQuarterDetails?.style.setProperty('padding-bottom', '0.25rem');
-						toolTipQuarterDetails.setAttribute('data-l10n-id', Locale.compose("LOC_PLOT_MOD_TCS_UNIQUE_QUARTER", quarters[0].CivilizationAdjective) + " " + Locale.compose(quarters[0].QuarterTooltip));
+						toolTipQuarterDetails.setAttribute('data-l10n-id', Locale.compose(quarters[0].QuarterTooltip));
 						this.container.appendChild(toolTipQuarterDetails);
 					}
 				}
@@ -701,15 +799,7 @@
 					plotTooltipSubContainer?.style.setProperty('align-content', 'center');
 					
 					// Icon
-					const toolTipImprovementIcon = document.createElement("div");
-					toolTipImprovementIcon.classList.add("plot-tooltip__large-resource-icon");
-					let toolTipImprovementIconCSS = (item.Info.ConstructibleType != "IMPROVEMENT_VILLAGE" && item.Info.ConstructibleType != "IMPROVEMENT_ENCAMPMENT") ? UI.getIconCSS(item.Info.ConstructibleType, "CONSTRUCTIBLE") : UI.getIconCSS("IMPROVEMENT_HILLFORT", "CONSTRUCTIBLE"); //fallback...blp:impicon_village (used for Village and Encampment improvements) doesn't seem to load anything. 
-					toolTipImprovementIconCSS = (toolTipImprovementIconCSS) ? toolTipImprovementIconCSS : UI.getIconCSS("IMPROVEMENT_EXPEDITION_BASE", "CONSTRUCTIBLE");//fallback for discoverables without icons
-					toolTipImprovementIcon?.style.setProperty('width', '2.25rem');
-					toolTipImprovementIcon?.style.setProperty('height', '2.25rem');
-					//toolTipImprovementIcon?.style.setProperty('background-size', '100%');
-					toolTipImprovementIcon?.style.setProperty('margin-right', '0.333333337rem');
-					toolTipImprovementIcon.style.backgroundImage = toolTipImprovementIconCSS;
+					const toolTipImprovementIcon = this.getConstructibleImageDiv(item, '2.25rem', '2.25rem');
 					plotTooltipSubContainer.appendChild(toolTipImprovementIcon);
 
 					// Improvement String
@@ -744,7 +834,7 @@
 				plotTooltipBuildingsContainer.classList.add('plot-tooltip__resource-container');
 				plotTooltipBuildingsContainer?.style.setProperty('justify-content', 'center');
 				plotTooltipBuildingsContainer?.style.setProperty('align-content', 'flex-start');
-				plotTooltipBuildingsContainer?.style.setProperty('padding', '0.5rem');
+				plotTooltipBuildingsContainer?.style.setProperty('padding', '0.25rem');
 				if (buildings.length == 1) {
 					plotTooltipBuildingsContainer?.style.removeProperty('width');
 					plotTooltipBuildingsContainer?.style.setProperty('max-width', '100%');	
@@ -783,9 +873,8 @@
 					plotTooltipSubContainer?.style.setProperty('align-content', 'flex-start');
 					plotTooltipSubContainer?.style.setProperty('padding-left', '0.5rem');
 					
-					
 					// Icon
-					const toolTipBuildingIcon = this.addConstructibleImage(item);
+					const toolTipBuildingIcon = this.getConstructibleImageDiv(item, '2rem', '2rem');
 					plotTooltipSubContainer.appendChild(toolTipBuildingIcon);
 					
 					// Building String
@@ -833,10 +922,7 @@
 					const toolTipWonderContainer = document.createElement('div');
 					toolTipWonderContainer.classList.add('plot-tooltip__resource-container');
 					
-					const toolTipWonderLargeIcon = document.createElement("div");
-					toolTipWonderLargeIcon.classList.add("plot-tooltip__large-resource-icon");
-					const toolTipWonderIconCSS = UI.getIconCSS(item.Info.ConstructibleType, "CONSTRUCTIBLE");
-					toolTipWonderLargeIcon.style.backgroundImage = toolTipWonderIconCSS;
+					const toolTipWonderLargeIcon = this.getConstructibleImageDiv(item, '2.6666666667rem', '2.6666666667rem');
 					toolTipWonderContainer.appendChild(toolTipWonderLargeIcon);
 					
 					const toolTipWonderDetails = document.createElement('div');
@@ -879,91 +965,138 @@
 						const isHealing = (!isUnderSiege && isDamaged) ? true : false;
 						
 						//Wall info
-						let wallName;
+						const defensiveConstructibles = [];
 						if (walls.length > 0) {
 							for (const wall of walls) {
 								if (wall.Info.ConstructibleType == "BUILDING_DEFENSIVE_FORTIFICATIONS" ) {
-									wallName = wall.Name;
+									defensiveConstructibles.push(wall.Name);
 									break;
 								}
 								else if (wall.Info.ConstructibleType == "BUILDING_MEDIEVAL_WALLS" ) {
-									wallName = wall.Name;
+									defensiveConstructibles.push(wall.Name);
 									break;
 								}
 								else if (wall.Info.ConstructibleType == "BUILDING_ANCIENT_WALLS" ) {
-									wallName = wall.Name;
+									defensiveConstructibles.push(wall.Name);
 									break;
-								}
-								else {
-									wallName = wall.Name;
 								}
 							}
 						}
 						// Check for other defensive buildings or wonders
-						// Concatenate string with names
-						let defensiveNames; 
 						for (const item of buildings) {
 							if (item.Defensive) {
-								defensiveNames = (!defensiveNames) ? item.Name : defensiveNames + " " + Locale.compose("LOC_PLOT_DIVIDER_DOT") + " " + item.Name;
+								defensiveConstructibles.push(item.Name);
 							}
 						}
 						for (const item of wonders) {
 							if (item.Defensive) {
-								defensiveNames = (!defensiveNames) ? item.Name : defensiveNames + " " + Locale.compose("LOC_PLOT_DIVIDER_DOT") + " " + item.Name;
+								defensiveConstructibles.push(item.Name);
 							}
 						}
 						// Concatenate wall name with other defensive structures
-						let allFortificationNames;
-						if (wallName && defensiveNames) {
-							allFortificationNames = wallName + " " + Locale.compose("LOC_PLOT_DIVIDER_DOT") + " " + defensiveNames;
-						}
-						else if (wallName) {
-							allFortificationNames = wallName;
-						}
-						else {
-							allFortificationNames = defensiveNames;
-						}					
+						const allFortificationNames = defensiveConstructibles.join(" • ");			
 						
 						// Build Fortification tooltip
-						if (isFortified && !isDamaged) {
+						if (isFortified || isDamaged) {
 							this.addHorizontalRule();
-							//const districtContainer = document.createElement("div");
-							//districtContainer.classList.add("plot-tooltip__district-container");
-							//districtContainer?.style.setProperty("background-color", "transparent");
-							//this.addGradiantBackground("linear-gradient(to left, #507552, rgba(80, 117, 82, 0))", "linear-gradient(to right, #507552, rgba(80, 117, 82, 0))", districtContainer);
-							const districtTitle = document.createElement("div");
-							districtTitle.classList.add("text-2xs", "text-center");
-							districtTitle.innerHTML = (!allFortificationNames) ? Locale.stylize("LOC_PLOT_MOD_TCS_FORTIFIED", currentHealth, maxHealth) : Locale.stylize("LOC_PLOT_MOD_TCS_FORTIFIED_WALL", currentHealth, maxHealth, allFortificationNames);
-							/*const districtHealth = document.createElement("div");
-							districtHealth.classList.add("plot-tooltip__district-health");
-							const healthCaption = document.createElement("div");
-							healthCaption.classList.add("plot-tooltip__lineThree");
-							healthCaption?.style.removeProperty("color"); //remove text color change
-							healthCaption?.style.setProperty("font-size", "calc(1rem + -0.3333333333rem)");
-							healthCaption.innerHTML = (!allFortificationNames) ? Locale.compose("LOC_PLOT_MOD_TCS_DISTRICT_HEALTH", currentHealth, maxHealth) : allFortificationNames + " " + Locale.compose("LOC_PLOT_DIVIDER_DOT") + " " + Locale.compose("LOC_PLOT_MOD_TCS_DISTRICT_HEALTH", currentHealth, maxHealth);
-							districtHealth.appendChild(healthCaption);
-							districtContainer.appendChild(districtTitle);
-							districtContainer.appendChild(districtHealth);*/
-							this.container.appendChild(districtTitle);
-						}
-						if (isUnderSiege || isHealing) {
-							this.addHorizontalRule();
-							const districtContainer = document.createElement("div");
-							districtContainer.classList.add("plot-tooltip__district-container");
-							//districtContainer?.style.removeProperty("background-color");
-							//this.addGradiantBackground("linear-gradient(to left, #3a0806, rgba(58, 8, 6, 0))", "linear-gradient(to right, #3a0806, rgba(58, 8, 6, 0))", districtContainer);
-							const districtTitle = document.createElement("div");
-							districtTitle.classList.add("plot-tooltip__district-title", "plot-tooltip__lineThree");
-							districtTitle.innerHTML = isUnderSiege ? Locale.compose("LOC_PLOT_TOOLTIP_UNDER_SIEGE") : Locale.compose("LOC_PLOT_TOOLTIP_HEALING_DISTRICT");
-							const districtHealth = document.createElement("div");
-							districtHealth.classList.add("plot-tooltip__district-health");
-							const healthCaption = document.createElement("div");
-							healthCaption.classList.add("plot-tooltip__health-caption", "plot-tooltip__lineThree");
-							healthCaption.innerHTML = (!allFortificationNames) ? Locale.compose("LOC_PLOT_MOD_TCS_DISTRICT_HEALTH", currentHealth, maxHealth) : allFortificationNames + " " + Locale.compose("LOC_PLOT_DIVIDER_DOT") + " " + Locale.compose("LOC_PLOT_MOD_TCS_DISTRICT_HEALTH", currentHealth, maxHealth);
-							districtHealth.appendChild(healthCaption);
-							districtContainer.appendChild(districtTitle);
-							districtContainer.appendChild(districtHealth);
-							this.container.appendChild(districtContainer);
+
+							const fortificationInfo = document.createElement("div");
+							fortificationInfo?.style.setProperty('position', 'relative');
+							fortificationInfo?.style.setProperty('display', 'flex');
+							fortificationInfo?.style.setProperty('flex-direction', 'row');
+							fortificationInfo?.style.setProperty('justify-content', 'center');
+							fortificationInfo?.style.setProperty('align-content', 'center');
+							//fortificationInfo?.style.setProperty('width', '100%');
+
+							// Add warning banner styling if under siege or recovering
+							if (isUnderSiege || isHealing) {
+								TCS_WARNING_BANNER_PROPERTIES.forEach(p => {
+									fortificationInfo?.style.setProperty(p[0], p[1]);
+								});
+								
+								const siegeTitle = document.createElement("div");
+								siegeTitle.classList.add("plot-tooltip__district-title", "plot-tooltip__lineThree");
+								siegeTitle.innerHTML = (isUnderSiege) ? Locale.compose("LOC_PLOT_TOOLTIP_UNDER_SIEGE") : Locale.compose("LOC_PLOT_TOOLTIP_HEALING_DISTRICT");
+								fortificationInfo.appendChild(siegeTitle);
+							}
+							
+							// Icon + String subcontainer
+							const subContainer = document.createElement("div");
+							subContainer?.style.setProperty('display', 'flex');
+							subContainer?.style.setProperty('flex-direction', 'row');
+							if (isUnderSiege || isHealing) {subContainer?.style.setProperty('justify-content', 'center');}
+							else {subContainer?.style.setProperty('justify-content', 'flex-start');}
+
+							const iconProperties = [
+								['position', 'relative'],
+								['background-size', 'contain'],
+								['background-repeat', 'no-repeat'],
+								['align-content', 'center'],
+								['width', '1rem'],
+								['height', '1rem'],
+								['margin-right', '0.2333337rem'],
+								['margin-top', '0.1rem']
+							]
+
+							// Fortification Background shadow
+							const fortificationIconShadow = document.createElement("div");
+							fortificationIconShadow.style.backgroundImage = `url("fs://game/Action_Defend.png")`;
+							fortificationIconShadow?.style.setProperty('transform', 'translate(-0.1111111111rem, 0.1111111111rem)');
+							fortificationIconShadow?.style.setProperty('fxs-background-image-tint', 'black');
+							iconProperties.forEach(p => {
+								fortificationIconShadow?.style.setProperty(p[0], p[1]);
+							});
+
+							// Fortification Icon
+							const fortificationIcon = document.createElement("div");
+							fortificationIcon?.style.setProperty('transform', 'translate(0.1111111111rem, -0.1111111111rem)');
+							iconProperties.forEach(p => {
+								fortificationIcon?.style.setProperty(p[0], p[1]);
+							});
+							fortificationIcon.style.backgroundImage = `url("fs://game/Action_Defend.png")`;
+							
+							// Text
+							const fortificationText = document.createElement("div");
+							fortificationText.classList.add('text-2xs');
+							//fortificationText?.style.setProperty('font-weight', '500');
+							if (isUnderSiege || isHealing) {fortificationText?.style.setProperty('color','#cea92f');}
+							if (!isDamaged) {
+								if (allFortificationNames) {fortificationText.setAttribute('data-l10n-id', allFortificationNames + " • " + maxHealth);}
+								else {fortificationText.setAttribute('data-l10n-id', maxHealth);}
+							}
+							else {
+								if (allFortificationNames) {fortificationText.setAttribute('data-l10n-id', allFortificationNames + " • " + currentHealth + "/" + maxHealth);}
+								else {fortificationText.setAttribute('data-l10n-id', currentHealth + "/" + maxHealth);}
+							}
+
+							// Health Background shadow
+							const healthIconShadow = document.createElement("div");
+							healthIconShadow.style.backgroundImage = `url("fs://game/prod_generic.png")`;
+							healthIconShadow?.style.setProperty('transform', 'translate(-0.1111111111rem, 0.1111111111rem)');
+							healthIconShadow?.style.setProperty('fxs-background-image-tint', 'black');
+							healthIconShadow?.style.setProperty('margin-left', '0.2333337rem');
+							iconProperties.forEach(p => {
+								healthIconShadow?.style.setProperty(p[0], p[1]);
+							});
+							healthIconShadow?.style.removeProperty('margin-right');
+
+							// Health Icon
+							const healthIcon = document.createElement("div");
+							healthIcon?.style.setProperty('transform', 'translate(0.1111111111rem, -0.1111111111rem)');
+							iconProperties.forEach(p => {
+								healthIcon?.style.setProperty(p[0], p[1]);
+							});
+							healthIcon?.style.removeProperty('margin-right');
+							healthIcon.style.backgroundImage = `url("fs://game/prod_generic.png")`;
+
+							// Build tooltip section
+							fortificationIconShadow.appendChild(fortificationIcon);
+							healthIconShadow.appendChild(healthIcon);
+							subContainer.appendChild(fortificationIconShadow);
+							subContainer.appendChild(fortificationText);
+							subContainer.appendChild(healthIconShadow);
+							fortificationInfo.appendChild(subContainer);
+							this.container.appendChild(fortificationInfo);
 						}	
 					}
 				}
@@ -1192,47 +1325,6 @@
 						tradeRoutes.push(capacity);
 					}
 				}
-				
-				/*
-					Additional information which can be gained from the city object:
-						Population::
-							city.population
-						Turns until growth::
-							city.Growth.turnsUntilGrowth
-						Local Happiness::
-							city.Yields?.getYield(YieldTypes.YIELD_HAPPINESS)
-				*/
-				
-				// Get Happiness
-				/*const happiness = city.Yields?.getYield(YieldTypes.YIELD_HAPPINESS);
-				if (happiness) {
-					cityHappiness = Locale.compose("LOC_PLOT_MOD_TCS_HAPPY");
-					if (happiness < 0) {
-						cityHappiness = Locale.compose("LOC_PLOT_MOD_TCS_UNHAPPY");
-					}
-					else if (happiness < -10) {
-						cityHappiness = Locale.compose("LOC_PLOT_MOD_TCS_ANGRY");
-					}
-					if (city.isInfected) {
-						cityHappiness = Locale.compose("LOC_PLOT_MOD_TCS_PLAGUE");
-					}
-				}*/
-				
-				// Get Trade Routes
-				/*const routes = city.Trade.routes;
-				if (routes.length > 0) {
-					for (let route of routes) {
-						// Resources from this route? Include partner city and list resource yields
-						const myRoutePayload = TradeRoute.getCityPayload(route, city.id);
-						if (myRoutePayload && myRoutePayload.resourceValues.length > 0) {
-							// Partner city name
-							let partnerCity = TradeRoute.getOppositeCity(route, city.id);
-							if (partnerCity) {
-								tradeRoutes = (tradeRoutes) ? (tradeRoutes + " " + Locale.compose("LOC_PLOT_DIVIDER_DOT") + " " + Locale.compose(partnerCity.name)) : Locale.compose(partnerCity.name);
-							}
-						}
-					}
-				}*/
 			}
 			
 			// Get relationship label (relationshipLabel)
@@ -1289,28 +1381,34 @@
 						this.addHorizontalRule();
 						const plotTooltipOwnerCiv = document.createElement("div");
 						plotTooltipOwnerCiv.classList.add("plot-tooltip__owner-civ-text");
-						plotTooltipOwnerCiv.innerHTML = civLabel;
+						if (tradeRoutes.length == 2 && plotIsCityCenter && !owningPlayerDiplomacy.isAtWarWith(localPlayerID)) {
+							const tradeString = "[icon:UNIT_MERCHANT]" + " " + tradeRoutes[0] + "/" + tradeRoutes[1];
+							plotTooltipOwnerCiv.setAttribute('data-l10n-id', civLabel + " " + tradeString);
+						}
+						else {plotTooltipOwnerCiv.innerHTML = civLabel;}
 						this.container.appendChild(plotTooltipOwnerCiv);
 					}
 				}
 				
 				// Additional info for local player
 				if (localPlayerID == owningPlayerID) {
-					// Town Focus				
-					if (townFocus) {
-						this.addHorizontalRule();
-						const plotTooltipTownFocus = document.createElement("div");
-						plotTooltipTownFocus.classList.add('text-2xs', 'text-center');
-						const townFocusString = (townFocus == "GROWING") ? Locale.compose("LOC_PLOT_MOD_TCS_TOWN_GROWING") : Locale.compose("LOC_PLOT_MOD_TCS_TOWN_SPECIALIZED");
-						let tooltipTownFocusString = townFocusString;
-						if (plotIsCityCenter && townFocus != "GROWING") {
-							tooltipTownFocusString = (citiesReceivingFood.length == 1) ? (townFocusString + " " + Locale.compose("LOC_PLOT_DIVIDER_DOT") + " " + Locale.compose("LOC_PLOT_MOD_TCS_TOWN_FEEDING_SINGULAR")) : (townFocusString + " " + Locale.compose("LOC_PLOT_DIVIDER_DOT") + " " + Locale.compose("LOC_PLOT_MOD_TCS_TOWN_FEEDING_PLURAL", citiesReceivingFood.length));
+					// Town Focus
+					if (plotIsCityCenter) {			
+						if (townFocus) {
+							this.addHorizontalRule();
+							const plotTooltipTownFocus = document.createElement("div");
+							plotTooltipTownFocus.classList.add('text-2xs', 'text-center');
+							const townFocusString = (townFocus == "GROWING") ? Locale.compose("LOC_PLOT_MOD_TCS_TOWN_GROWING") : Locale.compose("LOC_PLOT_MOD_TCS_TOWN_SPECIALIZED");
+							let tooltipTownFocusString = townFocusString;
+							if (townFocus != "GROWING") {
+								tooltipTownFocusString = (citiesReceivingFood.length == 1) ? (townFocusString + " " + Locale.compose("LOC_PLOT_DIVIDER_DOT") + " " + Locale.compose("LOC_PLOT_MOD_TCS_TOWN_FEEDING_SINGULAR")) : (townFocusString + " " + Locale.compose("LOC_PLOT_DIVIDER_DOT") + " " + Locale.compose("LOC_PLOT_MOD_TCS_TOWN_FEEDING_PLURAL", citiesReceivingFood.length));
+							}
+							else {
+								tooltipTownFocusString = townFocusString;
+							}
+							plotTooltipTownFocus.innerHTML = Locale.stylize(tooltipTownFocusString);
+							this.container.appendChild(plotTooltipTownFocus);
 						}
-						else {
-							tooltipTownFocusString = townFocusString;
-						}
-						plotTooltipTownFocus.innerHTML = Locale.stylize(tooltipTownFocusString);
-						this.container.appendChild(plotTooltipTownFocus);
 					}
 					
 					// Flag if city is not in trade network
@@ -1353,15 +1451,6 @@
 						this.container.appendChild(plotTooltipConnectionsContainer);
 						
 						//plotTooltipConnectionsContainer?.style.setProperty('', '');
-					}
-				}
-				// Additional info if player is not local player
-				else {
-					if (tradeRoutes.length == 2 && plotIsCityCenter && !owningPlayerDiplomacy.isAtWarWith(localPlayerID)) {
-						const plotTooltipTradeRoutes = document.createElement("div");
-						plotTooltipTradeRoutes.classList.add('text-2xs', 'text-center');
-						plotTooltipTradeRoutes.innerHTML = Locale.compose("LOC_PLOT_MOD_TCS_TRADE_ROUTES", tradeRoutes[0], tradeRoutes[1]);
-						this.container.appendChild(plotTooltipTradeRoutes);	
 					}
 				}
 			}
@@ -1795,16 +1884,50 @@
 			this.container.appendChild(tooltipTitle_LineFlex);
 		}
 		
-		addConstructibleImage(item) {
+		getConstructibleImageDiv(item, height, width) {
+			let constructibleIconCSS;
+			let marginRight = '0.333333337rem';
+			if (item.Info.ConstructibleType.startsWith("BUILDING")) {
+				constructibleIconCSS = UI.getIconCSS(item.Info.ConstructibleType, "CONSTRUCTIBLE");
+			}
+			else if (item.Info.ConstructibleType.startsWith("IMPROVEMENT")) {
+				if (item.Info.ConstructibleType != "IMPROVEMENT_VILLAGE" && item.Info.ConstructibleType != "IMPROVEMENT_ENCAMPMENT") {constructibleIconCSS = UI.getIconCSS(item.Info.ConstructibleType, "CONSTRUCTIBLE");}
+				//fallback...blp:impicon_village (used for Village and Encampment improvements) doesn't seem to load anything. 
+				else {constructibleIconCSS = UI.getIconCSS("IMPROVEMENT_HILLFORT", "CONSTRUCTIBLE");}
+				//further fallback, mostly for discoverables without icons
+				if (!constructibleIconCSS) {constructibleIconCSS = UI.getIconCSS("IMPROVEMENT_EXPEDITION_BASE", "CONSTRUCTIBLE");}
+			}
+			else if (item.Info.ConstructibleType.startsWith("WONDER")) {
+				constructibleIconCSS = UI.getIconCSS(item.Info.ConstructibleType, "CONSTRUCTIBLE");
+				marginRight = '0.6666666667rem';
+			}	
+			if (!constructibleIconCSS) {return;}
+			
+			// Background shadow
+			const constructibleIconShadow = document.createElement("div");
+			constructibleIconShadow.style.backgroundImage = constructibleIconCSS;
+			constructibleIconShadow?.style.setProperty('position', 'relative');
+			constructibleIconShadow?.style.setProperty('transform', 'translate(-0.1111111111rem, 0.1111111111rem)');
+			constructibleIconShadow?.style.setProperty('background-size', 'contain');
+			constructibleIconShadow?.style.setProperty('background-repeat', 'no-repeat');
+			constructibleIconShadow?.style.setProperty('fxs-background-image-tint', 'black');
+			constructibleIconShadow?.style.setProperty('width', width);
+			constructibleIconShadow?.style.setProperty('height', height);
+			constructibleIconShadow?.style.setProperty('margin-right', marginRight);
+			//constructibleIconShadow?.style.setProperty('padding-left', '0.333333337rem');
+
+			// Icon
 			const constructibleIcon = document.createElement("div");
-			constructibleIcon.classList.add("plot-tooltip__large-resource-icon");
-			const constructibleIconCSS = UI.getIconCSS(item.Info.ConstructibleType, "CONSTRUCTIBLE");
-			constructibleIcon?.style.setProperty('width', '2rem');
-			constructibleIcon?.style.setProperty('height', '2rem');
-			constructibleIcon?.style.setProperty('margin-right', '0.333333337rem');
-			constructibleIcon?.style.setProperty('padding-left', '0.333333337rem');
+			constructibleIcon?.style.setProperty('position', 'relative');
+			constructibleIcon?.style.setProperty('transform', 'translate(0.1111111111rem, -0.1111111111rem)');
+			constructibleIcon?.style.setProperty('background-size', 'contain');
+			constructibleIcon?.style.setProperty('background-repeat', 'no-repeat');
+			constructibleIcon?.style.setProperty('width', width);
+			constructibleIcon?.style.setProperty('height', height);
 			constructibleIcon.style.backgroundImage = constructibleIconCSS;
-			return constructibleIcon;
+
+			constructibleIconShadow.appendChild(constructibleIcon);
+			return constructibleIconShadow;
 		}
 		addConstructibleTag(string) {
 			const constructibleTagString = document.createElement("div");
