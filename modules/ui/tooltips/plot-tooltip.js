@@ -316,9 +316,49 @@
 					maxValueLength = Math.max(maxValueLength, value.length);
 					toolTipIndividualYieldValues.textContent = value;
 					tooltipIndividualYieldFlex.appendChild(toolTipIndividualYieldValues);
+
 					totalYields = totalYields + yield_amount;
 				}
 			});
+
+			// Add specialist info
+			if (plotObject.OwningPlayerID == plotObject.LocalPlayerID && plotObject.City && plotObject.District && (plotObject.District.type == DistrictTypes.URBAN || plotObject.District.type == DistrictTypes.CITY_CENTER)) {
+				if (!plotObject.City.isTown) {
+					const numWorkerSlots = plotObject.City.Workers.getCityWorkerCap();
+					if (numWorkerSlots > 0) {
+						const cityPlots = plotObject.City.Workers.GetAllPlacementInfo();
+						if (cityPlots) {
+							const plot = cityPlots.find(p => p.PlotIndex == plotObject.PlotIndex);
+							if (plot) {
+								const numWorkers = plot.NumWorkers;
+								const workerString = (numWorkerSlots == numWorkers) ? numWorkers : (numWorkers + "/" + numWorkerSlots);
+
+								const tooltipIndividualYieldFlex = document.createElement("div");
+								tooltipIndividualYieldFlex.setAttribute('justify-content', 'flex-end');
+								tooltipIndividualYieldFlex.classList.add("plot-tooltip__IndividualYieldFlex");
+								//tooltipIndividualYieldFlex.ariaLabel = `${Locale.toNumber()} ${Locale.compose(yield_define.Name)}`;
+								fragment.appendChild(tooltipIndividualYieldFlex);
+								const yieldIconCSS = UI.getIconCSS("CITY_SPECIAL_BASE");
+								const yieldIconShadow = document.createElement("div");
+								yieldIconShadow.classList.add("plot-tooltip__IndividualYieldIcons-Shadow");
+								yieldIconShadow.style.backgroundImage = yieldIconCSS;
+								tooltipIndividualYieldFlex.appendChild(yieldIconShadow);
+								const yieldIcon = document.createElement("div");
+								yieldIcon.classList.add("plot-tooltip__IndividualYieldIcons");
+								yieldIcon.style.backgroundImage = yieldIconCSS;
+								yieldIconShadow.appendChild(yieldIcon);
+								const toolTipIndividualYieldValues = document.createElement("div");
+								toolTipIndividualYieldValues.classList.add("plot-tooltip__IndividualYieldValues");
+								const value = workerString;
+								toolTipIndividualYieldValues.textContent = value;
+								tooltipIndividualYieldFlex.appendChild(toolTipIndividualYieldValues);
+							}
+						}
+					}
+				}
+			}
+
+
 			this.yieldsFlexbox.appendChild(fragment);
 			// Give all the yields extra room if one of them has extra digits, to keep the spacing even.
 			this.yieldsFlexbox.classList.remove('resourcesFlex--double-digits', 'resourcesFlex--triple-digits');
@@ -392,6 +432,7 @@
 			const player = plotObject.OwningPlayer;
 			
 			// Get city & specialist Info
+			/*
 			const city = plotObject.City;
 			let numWorkers = undefined;
 			let numWorkerSlots = undefined;
@@ -408,7 +449,7 @@
 						}
 					}
 				}	
-			}
+			}*/
 			
 			// Collect and sort constructibles
 			constructibles.forEach((item) => {
@@ -642,43 +683,15 @@
 				improvements.forEach((item) => {
 					
 					// Parse item tag (Wilderness, Rural, Unique)
-					let itemTag = (!item.Info.Discovery) ? Locale.compose("LOC_PLOT_MOD_TCS_RURAL") : Locale.compose("LOC_PLOT_MOD_TCS_WILDERNESS");
-					if (item.UniqueTrait) {
-						itemTag = itemTag + " " + Locale.compose("LOC_PLOT_DIVIDER_DOT") + " " + Locale.compose("LOC_PLOT_MOD_TCS_UNIQUE");
-					}
+					const itemTags = [];
+					if (item.Info.Discovery) {itemTags.push(Locale.compose("LOC_PLOT_MOD_TCS_WILDERNESS"));}
+					else {itemTags.push(Locale.compose("LOC_PLOT_MOD_TCS_RURAL"));}
+					if (item.UniqueTrait) {itemTags.push(Locale.compose("LOC_PLOT_MOD_TCS_UNIQUE"));}
 					
 					// Parse item status (Damaged, In Progress)
-					let itemStatus;
-					if (item.Damaged) {
-						itemStatus = Locale.compose("LOC_PLOT_TOOLTIP_DAMAGED");
-					}
-					else if (!item.Completed) {
-						itemStatus = Locale.compose("LOC_PLOT_TOOLTIP_IN_PROGRESS");
-					}
-					else {
-						itemStatus = undefined;
-					}
-					
-					// Concatenate tag and status
-					let propertyString;
-					if (itemTag || itemStatus) {
-						if (!itemTag) {
-							propertyString = "[N][STYLE:text-2xs]" + itemStatus + "[/STYLE]";
-						}
-						else if (!itemStatus) {
-							propertyString = "[N][STYLE:text-2xs]" + itemTag + "[/STYLE]";
-						}
-						else {
-							propertyString = "[N][STYLE:text-2xs]" + itemTag + " " + Locale.compose("LOC_PLOT_DIVIDER_DOT") + " " + itemStatus + "[/STYLE]";
-						}
-					}
-					
-					// Check if the name needs to be split into 2 lines
-					const itemName = "[STYLE:text-xs]" + item.Name + "[/STYLE]";
-					
-					// Concatenate name, tag, and status
-					const improvementString = (!propertyString) ? itemName : itemName + propertyString;
-					
+					if (item.Damaged) {itemTags.push(Locale.compose("LOC_PLOT_TOOLTIP_DAMAGED"));}
+					else if (!item.Completed) {itemTags.push(Locale.compose("LOC_PLOT_TOOLTIP_IN_PROGRESS"));}
+									
 					// Sub Container
 					const plotTooltipSubContainer = document.createElement("div");
 					plotTooltipSubContainer.classList.add('plot-tooltip__resource-container');
@@ -698,16 +711,26 @@
 					toolTipImprovementIcon?.style.setProperty('margin-right', '0.333333337rem');
 					toolTipImprovementIcon.style.backgroundImage = toolTipImprovementIconCSS;
 					plotTooltipSubContainer.appendChild(toolTipImprovementIcon);
-					
+
 					// Improvement String
 					const plotTooltipImprovementElement = document.createElement("div");
-					plotTooltipImprovementElement.classList.add('text-left');
 					plotTooltipImprovementElement?.style.setProperty('margin-left', '0.15rem');
 					plotTooltipImprovementElement?.style.setProperty('margin-right', '0.15rem');
-					//plotTooltipImprovementElement?.style.setProperty('flex-wrap', 'wrap');
-					plotTooltipImprovementElement.innerHTML = Locale.stylize(improvementString);
-					plotTooltipSubContainer.appendChild(plotTooltipImprovementElement);
+					plotTooltipImprovementElement?.style.setProperty('flex-direction', 'column');
+					plotTooltipImprovementElement?.style.setProperty('align-content', 'flex-start');
 					
+					const plotTooltipImprovementString = document.createElement("div");
+					plotTooltipImprovementString.classList.add('text-xs', 'text-left');
+					plotTooltipImprovementString?.style.setProperty('max-width', '8rem');
+					plotTooltipImprovementString?.style.setProperty('font-weight', 'bold');
+					plotTooltipImprovementString.setAttribute('data-l10n-id', item.Name);
+					plotTooltipImprovementElement.appendChild(plotTooltipImprovementString);
+					
+					if (itemTags.length > 0) {
+						const plotTooltipPropertyString = this.addConstructibleTag(itemTags.join(" • "));
+						plotTooltipImprovementElement.appendChild(plotTooltipPropertyString);	
+					}
+					plotTooltipSubContainer.appendChild(plotTooltipImprovementElement);
 					plotTooltipImprovementContainer.appendChild(plotTooltipSubContainer);
 				});
 				this.container.appendChild(plotTooltipImprovementContainer);
@@ -773,9 +796,9 @@
 					plotTooltipBuildingElement?.style.setProperty('align-content', 'flex-start');
 					
 					const plotTooltipBuildingString = document.createElement("div");
-					plotTooltipBuildingString.classList.add('text-xs', 'text-left', 'font-title');
+					plotTooltipBuildingString.classList.add('text-xs', 'text-left',);
 					plotTooltipBuildingString?.style.setProperty('max-width', '5rem');
-					//plotTooltipBuildingString?.style.setProperty('font-weight', '600');
+					plotTooltipBuildingString?.style.setProperty('font-weight', 'bold');
 					plotTooltipBuildingString.setAttribute('data-l10n-id', item.Name);
 					plotTooltipBuildingElement.appendChild(plotTooltipBuildingString);
 					
@@ -794,21 +817,15 @@
 			if (wonders.length > 0) {
 				wonders.sort((a,b) => (a.Name > b.Name) ? 1 : ((b.Name > a.Name) ? -1 : 0));		
 				wonders.forEach((item) => {         
-					let itemStatus;
-					if (item.Damaged) {
-						itemStatus = "(" + Locale.compose("LOC_PLOT_TOOLTIP_DAMAGED") + ")";
-					}
-					else if (!item.Completed) {
-						itemStatus = "(" + Locale.compose("LOC_PLOT_TOOLTIP_IN_PROGRESS") + ")";
-					}
-					else {
-						const pass = true;
-					}
+					const itemTags = [];
+					if (item.Damaged) {itemTags.push(Locale.compose("LOC_PLOT_TOOLTIP_DAMAGED"));}
+					else if (!item.Completed) {itemTags.push(Locale.compose("LOC_PLOT_TOOLTIP_IN_PROGRESS"));}
+
 					// Add status
-					if (itemStatus) {
+					if (itemTags.length > 0) {
 						const tooltipBuildingStatus = document.createElement("div");
 						tooltipBuildingStatus.classList.add("plot-tooltip__building-status");
-						tooltipBuildingStatus.innerHTML = itemStatus;
+						tooltipBuildingStatus.innerHTML = itemTags.join(" • ");
 						this.container.appendChild(tooltipBuildingStatus);
 					}			
 					
@@ -839,7 +856,7 @@
 			}
 			
 			// Specialists
-			if (numWorkers != undefined && numWorkerSlots && playerID == plotObject.LocalPlayerID) {
+			/*if (numWorkers != undefined && numWorkerSlots && playerID == plotObject.LocalPlayerID) {
 				const tooltipSpecialistLineFlex = document.createElement("div");
 				tooltipSpecialistLineFlex.classList.add("plot-tooltip__horizontalRule");
 				const tooltipSpecialistString = document.createElement("div");
@@ -847,7 +864,7 @@
 				tooltipSpecialistString.innerHTML = Locale.stylize("LOC_PLOT_MOD_TCS_SPECIALIST_COUNT", numWorkers, numWorkerSlots);
 				tooltipSpecialistLineFlex.appendChild(tooltipSpecialistString);
 				this.container.appendChild(tooltipSpecialistLineFlex);
-			}
+			}*/
 			
 			// Fortifications Container
 			if (player) {
