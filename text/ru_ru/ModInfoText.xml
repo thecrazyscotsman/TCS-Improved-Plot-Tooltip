@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Database>
+	<LocalizedText>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_NAME" Language="ru_RU">
+			<Text>TCS Improved Plot Tooltip</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_DESCRIPTION" Language="ru_RU">
+			<Text>Различные улучшения для всплывающих подсказок с информацией о клетке.</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_COMPATIBILITY" Language="ru_RU">
+			<Text>Совместим с [B]Sukritact's Simple UI Adjustments[/B], не совместим с другими модификациями всплывающих подсказок о клетке.</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_THANKS" Language="ru_RU">
+			<Text>leonardify, Webrok, fulfom, thendye, alwdark, Klajwert, Messiah360, Fampat, Gusjeon с сайта Civfanatics за локализации.[N]leonardify и beezany с CivFanatics за помощь с кодом.</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_URL" Language="ru_RU">
+			<Text>https://forums.civfanatics.com/resources/tcs-improved-plot-tooltip.31859/</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_GROUP_TCS_IMPROVED_PLOT_TOOLTIP" Language="ru_RU">
+			<Text>TCS Improved Plot Tooltip</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_POTENTIAL_IMPROVEMENT_LABEL" Language="ru_RU">
+			<Text>Показывать улучшение клетки</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_POTENTIAL_IMPROVEMENT_DESCRIPTION" Language="ru_RU">
+			<Text>Включает отображение возможного улучшения при обработке клетки.</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_QUARTER_DESCRIPTION_LABEL" Language="ru_RU">
+			<Text>Показывать описание квартала</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_QUARTER_DESCRIPTION_DESCRIPTION" Language="ru_RU">
+			<Text>Включает отображение описания для уникальных кварталов.</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_BUILDING_DISPLAY_MODE_LABEL" Language="ru_RU">
+			<Text>Отображать здания в ряд</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_BUILDING_DISPLAY_MODE_DESCRIPTION" Language="ru_RU">
+			<Text>Включает отображение списка зданий в горизонтальный ряд. В выключенном состоянии - отображает вертикально в колонку.</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_PLAYER_RELATIONSHIP_LABEL" Language="ru_RU">
+			<Text>Отображать дипломатические отношения</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_PLAYER_RELATIONSHIP_DESCRIPTION" Language="ru_RU">
+			<Text>Включает отображение дипломатических отношений с оппонентом при наведении на его территорию.</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_COORDINATES_LABEL" Language="ru_RU">
+			<Text>Показывать координаты клетки</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_COORDINATES_DESCRIPTION" Language="ru_RU">
+			<Text>Включает отображение координат клетки по осям X и Y.</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_ENABLE_DEBUG_LABEL" Language="ru_RU">
+			<Text>Режим отладки</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_ENABLE_DEBUG_DESCRIPTION" Language="ru_RU">
+			<Text>Включает отображение дополнительной информации.</Text>
+		</Row>
+	</LocalizedText>
+</Database>
