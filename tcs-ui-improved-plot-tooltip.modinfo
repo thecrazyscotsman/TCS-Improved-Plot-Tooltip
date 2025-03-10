@@ -26,13 +26,13 @@
 				<LoadOrder>1001</LoadOrder>
 			</Properties>
 			<Actions>
-				<UIScripts>
-					<Item>settings/settings.js</Item>
-					<Item>settings/settings-init.js</Item>
-				</UIScripts>
 				<ImportFiles>
 					<Item>ui/tooltips/plot-tooltip.js</Item>
 				</ImportFiles>
+				<UIScripts>
+					<Item>settings/settings.js</Item>
+					<Item>settings/settings-init-ingame.js</Item>
+				</UIScripts>
 				<UpdateText>
 					<Item>text/en_us/InGameText.xml</Item>
 					<Item locale="it_IT">text/it_it/InGameText.xml</Item>

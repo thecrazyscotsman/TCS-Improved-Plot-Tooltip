@@ -1,11 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Database>
 	<LocalizedText>
+		<!-- Mod page -->
 		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_NAME" Language="ko_KR">
-			<Text>TCS Improved Plot Tooltip</Text>
+			<Text>TCS의 개선된 타일 툴팁</Text>
 		</Row>
 		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_DESCRIPTION" Language="ko_KR">
 			<Text>생산 툴팁을 여러 측면에서 개선합니다.</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_COMPATIBILITY" Language="ko_KR">
+			<Text>[B]Sukritact's Simple UI Adjustments[/B]와 호환, 타일 툴팁을 변경하는 다른 모드와 호환 불가.</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_THANKS" Language="ko_KR">
+			<Text>Civfanatics의 leonardify, Webrok, fulfom, thendye, alwdark, Klajwert, Messiah360, Fampat, Gusjeon에게 지역화에 대한 기여를 해주셔서 감사합니다.[N]CivFanatics의 leonardify와 beezany에게 코드 지원을 해주셔서 감사합니다.</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_URL" Language="ko_KR">
+			<Text>https://forums.civfanatics.com/resources/tcs-improved-plot-tooltip.31859/</Text>
+		</Row>
+		<!-- Home Option -->
+		<Row Tag="LOC_OPTIONS_GROUP_TCS_IMPROVED_PLOT_TOOLTIP" Language="ko_KR">
+			<Text>TCS의 개선된 타일 툴팁</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_POTENTIAL_IMPROVEMENT_LABEL" Language="ko_KR">
+			<Text>건설 가능 시설 보기</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_POTENTIAL_IMPROVEMENT_DESCRIPTION" Language="ko_KR">
+			<Text>개발되지 않은 타일에 기본 건설가능 시설 표시 여부를 설정합니다.</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_QUARTER_DESCRIPTION_LABEL" Language="ko_KR">
+			<Text>구역 설명 보기</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_QUARTER_DESCRIPTION_DESCRIPTION" Language="ko_KR">
+			<Text>툴팁에 특유 구역에 대한 설명 표시 여부를 설정합니다.</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_BUILDING_DISPLAY_MODE_LABEL" Language="ko_KR">
+			<Text>가로로 건물 표시</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_BUILDING_DISPLAY_MODE_DESCRIPTION" Language="ko_KR">
+			<Text>툴팁에서 건물을 가로 또는 세로로 표시 여부를 설정합니다. 가로 표시를 권장합니다.</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_PLAYER_RELATIONSHIP_LABEL" Language="ko_KR">
+			<Text>플레이어 관계 표시</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_PLAYER_RELATIONSHIP_DESCRIPTION" Language="ko_KR">
+			<Text>영토 위에 마우스 오버시 플레이어와의 관계가 툴팁에 표시되는지 여부를 설정합니다.</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_COORDINATES_LABEL" Language="ko_KR">
+			<Text>타일 좌표 표시</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_COORDINATES_DESCRIPTION" Language="ko_KR">
+			<Text>툴팁에 XY좌표 표시 여부를 설정합니다.</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_ENABLE_DEBUG_LABEL" Language="ko_KR">
+			<Text>디버그 정보 활성화</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_ENABLE_DEBUG_DESCRIPTION" Language="ko_KR">
+			<Text>툴팁에 추가 디버그 정보 표시 여부를 설정합니다.</Text>
 		</Row>
 	</LocalizedText>
 </Database>

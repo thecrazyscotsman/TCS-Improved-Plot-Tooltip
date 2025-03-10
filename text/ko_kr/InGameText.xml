@@ -38,7 +38,7 @@
 			<Text>{1_Route} • {LOC_NAVIGABLE_RIVER_FERRY}</Text>
 		</Replace>
 		<Replace Tag="LOC_PLOT_MOD_TCS_COORDINATES" Language="ko_KR">
-			<Text>Plot({1_X},{2_Y})</Text>
+			<Text>좌표({1_X},{2_Y})</Text>
 		</Replace>
 		<Replace Tag="LOC_PLOT_MOD_TCS_CONSTRUCTIBLE_NAME" Language="ko_KR">
 			<Text>{1_Name} {2_Tag}</Text>
@@ -95,10 +95,10 @@
 			<Text>마을 전문화</Text>
 		</Replace>
 		<Replace Tag="LOC_PLOT_MOD_TCS_TOWN_FEEDING_PLURAL" Language="ko_KR">
-			<Text>{1_Num}도시에 식량 공급</Text>
+			<Text>{1_Num}개 도시에 식량 공급</Text>
 		</Replace>
 		<Replace Tag="LOC_PLOT_MOD_TCS_TOWN_FEEDING_SINGULAR" Language="ko_KR">
-			<Text>1도시에 식량 공급</Text>
+			<Text>1개 도시에 식량 공급</Text>
 		</Replace>
 		<Replace Tag="LOC_PLOT_MOD_TCS_NOT_IN_TRADE_NETWORK" Language="ko_KR">
 			<Text>교역로 벗어남！</Text>
