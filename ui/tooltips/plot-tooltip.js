@@ -17,17 +17,6 @@
 
 	import { TCS_ShowPotentialImprovement, TCS_ShowQuarterDescription, TCS_BuildingFlexDisplayMode, TCS_ShowPlayerRelationship, TCS_ShowCoordinates, TCS_EnableDebugMode } from 'fs://game/tcs-ui-improved-plot-tooltip/settings/settings.js';
 
-	// USER CONFIG
-	/*
-	const CONFIG_TCS_SHOW_POTENTIAL_IMPROVEMENT = (TCS_ShowPotentialImprovement.Option == true) ? true : false;
-	const CONFIG_TCS_SHOW_QUARTER_DESCRIPTION = (TCS_ShowQuarterDescription.Option == true) ? true : false;
-	const CONFIG_TCS_BUILDING_FLEX_DISPLAY_MODE = (TCS_BuildingFlexDisplayMode.Option == true) ? 'ROW' : 'COLUMN';
-	const CONFIG_TCS_BUILDING_TAGS_DISPLAY_MODE = 'TEXT'; // 'TEXT' or 'ICONS', doesn't actually do anything yet
-	const CONFIG_TCS_SHOW_PLAYER_RELATIONSHIP = (TCS_ShowPlayerRelationship.Option == true) ? true : false;
-	const CONFIG_TCS_SHOW_COORDINATES = (TCS_ShowCoordinates.Option == true) ? true : false;
-	const CONFIG_TCS_DEBUG_MODE = (TCS_EnableDebugMode.Option == true) ? true : false;
-	*/
-
 	console.warn("----------------------------------");
 	console.warn("TCS IMPROVED PLOT TOOLTIP (TCS-IPT) - LOADED");
 	console.warn("----------------------------------");
@@ -72,6 +61,8 @@
 		['text-align', 'center'],
 		['font-size', 'calc(1rem + -0.1111111111rem)'],
 		['letter-spacing', '0.1111111111rem'],
+		['padding-top', '0.25rem'],
+		['padding-bottom', '0.1rem'],
 		['padding-left', '0.6666666667rem'],
 		['padding-right', '0.6666666667rem'],
 		['line-height', '1.3333333333rem'],
@@ -187,6 +178,8 @@
 			this.yieldsFlexbox = document.createElement('div');
 			this.tooltip.classList.add('plot-tooltip', 'max-w-96');
 			this.tooltip.appendChild(this.container);
+
+			// User config related-items
 			this.updateQueued = false;
 			this.isShowingDebug = false;
 			this.isShowingCoordinates = false;
@@ -194,6 +187,8 @@
 			this.isShowingPotentialImprovement = true;
 			this.isShowingPlayerRelationship = true;
 			this.isShowingBuildingsAsRow = true;
+
+			// TCS - need to add a listener to update tooltip when different options are selected
 			this.updateTCSPlotTooltipListener = this.queueUpdate.bind(this);
 			window.addEventListener('update-tcs-plot-tooltip', this.updateTCSPlotTooltipListener);
 			Loading.runWhenFinished(() => {
@@ -205,6 +200,7 @@
 					const url = UI.getIcon(`${c.ConstructibleType}`, "CONSTRUCTIBLE");
 					Controls.preloadImage(url, 'plot-tooltip');
 				}
+				// Update based on stored user config options
 				this.updateTooltipConfig();
 			});
 		}
@@ -234,25 +230,8 @@
 			//this.isShowingDebug = UI.isDebugPlotInfoVisible(); // Ensure debug status hasn't changed
 			
 			const plotCoord = this.plotCoord;
-			// Get a bunch of info to reduce calls
-			/* plot object attributes:
-				coordinate
-				x
-				y
-				PlotIndex
-				OwningPlayerID
-				OwningPlayer
-				OwningPlayerDiplomacy
-				OwningPlayerDistricts
-				LocalPlayerID
-				LocalPlayer
-				LocalPlayerDiplomacy
-				Constructibles
-				DistrictID
-				District
-				City
-				Units
-			*/
+
+			// Get a bunch of info in 1 call to reduce repeated queries
 			this.plotObject = this.getPlotInfo(plotCoord);
 			
 			//---------------------
@@ -266,8 +245,9 @@
 			this.addBiomeTerrain(this.plotObject);
 			
 			// SECTION: Feature
-			this.addFeatureRiver(this.plotObject);
-					
+			const feature = this.getFeatureInfo(this.plotObject);
+			if (feature && !feature.plotIsNaturalWonder) {this.addFeatureRiver(this.plotObject);}
+				
 			// SECTION: Yields
 			this.yieldsFlexbox.classList.add("plot-tooltip__resourcesFlex");
 			this.container.appendChild(this.yieldsFlexbox);
@@ -276,6 +256,9 @@
 			// SECTION: Constructibles
 			this.addConstructibles(this.plotObject);
 			
+			// SECTION: Natural Wonder
+			if (feature && feature.plotIsNaturalWonder) {this.addFeatureRiver(this.plotObject);}
+
 			// SECTION: Resource
 			this.addResource(this.plotObject);
 			
@@ -454,6 +437,7 @@
 			const fragment = document.createDocumentFragment();
 			let maxValueLength = 0;
 			let totalYields = 0;
+			let yieldTypes = 0;
 			GameInfo.Yields.forEach(yield_define => {
 				const yield_amount = GameplayMap.getYield(plotObject.x, plotObject.y, yield_define.YieldType, plotObject.LocalPlayerID);
 				if (yield_amount > 0) {
@@ -478,6 +462,7 @@
 					tooltipIndividualYieldFlex.appendChild(toolTipIndividualYieldValues);
 
 					totalYields = totalYields + yield_amount;
+					yieldTypes = yieldTypes + 1;
 				}
 			});
 
@@ -520,7 +505,7 @@
 					additionalYieldInfo?.style.setProperty(p[0], p[1]);
 				});
 				
-				if (totalYields > 0) {
+				if (totalYields > 0 && yieldTypes > 1) {
 					const subContainer = document.createElement("div");
 					subContainer?.style.setProperty('display', 'flex');
 					subContainer?.style.setProperty('flex-direction', 'row');
@@ -572,6 +557,7 @@
 				// Resource icon and tooltip	
 				const toolTipResourceContainer = document.createElement('div');
 				toolTipResourceContainer.classList.add('plot-tooltip__resource-container');
+				//toolTipResourceContainer?.style.setProperty('justify-content', 'center');
 				
 				const toolTipResourceIconCSS = UI.getIconCSS(hexResource.ResourceType);
 
@@ -593,7 +579,8 @@
 				
 				const toolTipResourceDescription = document.createElement("div");
 				toolTipResourceDescription.classList.add("plot-tooltip__resource-label_description");
-				toolTipResourceDescription.setAttribute('data-l10n-id', hexResource.Tooltip);
+				//toolTipResourceDescription.setAttribute('data-l10n-id', hexResource.Tooltip);
+				toolTipResourceDescription.innerHTML = Locale.stylize(hexResource.Tooltip);
 				
 				toolTipResourceDetails.appendChild(toolTipResourceDescription);
 				toolTipResourceContainer.appendChild(toolTipResourceDetails);
@@ -788,7 +775,8 @@
 							['justify-content', 'center'],
 							['align-content', 'center'],
 							['max-width', '100%'],
-							['padding', '0.25rem']
+							['padding-top', '0.125rem'],
+							['padding-bottom', '0.125rem'],
 						]);
 					
 					if (potentialImprovements.length > 1) {
@@ -823,7 +811,8 @@
 						['justify-content', 'center'],
 						['align-content', 'center'],
 						['max-width', '100%'],
-						['padding', '0.25rem']
+						['padding-top', '0.125rem'],
+						['padding-bottom', '0.125rem'],
 					]);
 				plotTooltipImprovementContainer?.style.removeProperty('width');
 				
@@ -844,7 +833,7 @@
 						[
 							['justify-content', 'center'],
 							['align-content', 'center'],
-							['padding', '0.25rem']
+							//['padding', '0.25rem']
 						]);
 					plotTooltipSubContainer?.style.removeProperty('width');
 					
@@ -964,6 +953,7 @@
 						plotTooltipBuildingElement?.style.setProperty(p[0], p[1]);
 					});
 					
+					// Modify building name to fit better when displayed as row
 					const itemName = (this.isShowingBuildingsAsRow == true && Locale.compose(item.Name).length > 12) ? Locale.compose(item.Name).replaceAll('-', ' ') : Locale.compose(item.Name);
 					const plotTooltipBuildingString = this.addElement_Text(itemName, [
 						['font-weight', 'bold']
