@@ -272,10 +272,12 @@
 			this.yieldsFlexbox.classList.add("plot-tooltip__resourcesFlex");
 			this.container.appendChild(this.yieldsFlexbox);
 			this.addPlotYields(this.plotObject);
-			this.addResource(this.plotObject);
 			
 			// SECTION: Constructibles
 			this.addConstructibles(this.plotObject);
+			
+			// SECTION: Resource
+			this.addResource(this.plotObject);
 			
 			// SECTION: City & Owner
 			this.addCityOwnerInfo(this.plotObject);
@@ -785,9 +787,14 @@
 						[
 							['justify-content', 'center'],
 							['align-content', 'center'],
-							//['max-width', '75%'],
+							['max-width', '100%'],
 							['padding', '0.25rem']
 						]);
+					
+					if (potentialImprovements.length > 1) {
+						plotTooltipSubContainer?.style.setProperty('width', '50%');
+					}
+					else {plotTooltipSubContainer?.style.removeProperty('width');}
 					
 					// Icon
 					const toolTipImprovementIcon = this.addElement_ConstructibleIcon(item, [['opacity', '0.35']]);
@@ -815,7 +822,7 @@
 					[
 						['justify-content', 'center'],
 						['align-content', 'center'],
-						//['max-width', '75%'],
+						['max-width', '100%'],
 						['padding', '0.25rem']
 					]);
 				plotTooltipImprovementContainer?.style.removeProperty('width');
@@ -839,6 +846,7 @@
 							['align-content', 'center'],
 							['padding', '0.25rem']
 						]);
+					plotTooltipSubContainer?.style.removeProperty('width');
 					
 					// Icon
 					const toolTipImprovementIcon = this.addElement_ConstructibleIcon(item);
