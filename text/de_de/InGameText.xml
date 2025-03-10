@@ -53,7 +53,7 @@
 			<Text>Stadtviertel</Text>
 		</Row>
 		<Row Tag="LOC_PLOT_MOD_TCS_UNIQUE_QUARTER" Language="de_DE">
-			<Text>{1_Adjective} Einziartiges Stadtviertel.</Text>
+			<Text>{1_Adjective} Einzigartiges Stadtviertel.</Text>
 		</Row>
 		<Row Tag="LOC_PLOT_MOD_TCS_CITY_CENTER" Language="de_DE">
 			<Text>Stadtzentrum</Text>
@@ -80,7 +80,7 @@
 			<Text>{1_Constructible} {2_Status}</Text>
 		</Row>
 		<Row Tag="LOC_PLOT_MOD_TCS_POTENTIAL_IMPROVEMENT" Language="de_DE">
-			<Text>[STYLE:text-2xs]Ausgebaubar mit:[/STYLE][N]{1_Name}</Text>
+			<Text>[STYLE:text-2xs]Ausbaubar mit:[/STYLE][N]{1_Name}</Text>
 		</Row>
 		<Row Tag="LOC_PLOT_MOD_TCS_VILLAGE" Language="de_DE">
 			<Text>Unabhängige Gemeinde</Text>
