@@ -26,6 +26,10 @@
 				<LoadOrder>1001</LoadOrder>
 			</Properties>
 			<Actions>
+				<UIScripts>
+					<Item>settings/settings.js</Item>
+					<Item>settings/settings-init.js</Item>
+				</UIScripts>
 				<ImportFiles>
 					<Item>ui/tooltips/plot-tooltip.js</Item>
 				</ImportFiles>
@@ -45,6 +49,10 @@
 		</ActionGroup>
 		<ActionGroup id="shell-tcs-ui-improved-plot-tooltip" scope="shell" criteria="always">
 			<Actions>
+				<UIScripts>
+					<Item>settings/settings.js</Item>
+					<Item>settings/settings-init.js</Item>
+				</UIScripts>
 				<UpdateText>
 					<Item>text/en_us/ModInfoText.xml</Item>
 					<Item locale="it_IT">text/it_it/ModInfoText.xml</Item>

@@ -15,14 +15,16 @@
 	import CityDetails, { UpdateCityDetailsEventName } from "/base-standard/ui/city-details/model-city-details.js";
 	import { InterfaceMode } from '/core/ui/interface-modes/interface-modes.js';
 
+	import { TCS_ShowPotentialImprovement, TCS_ShowQuarterDescription, TCS_BuildingFlexDisplayMode, TCS_ShowPlayerRelationship, TCS_ShowCoordinates, TCS_EnableDebugMode } from 'fs://game/tcs-ui-improved-plot-tooltip/settings/settings.js';
+
 	// USER CONFIG
-	const CONFIG_TCS_SHOW_POTENTIAL_IMPROVEMENT = true;
-	const CONFIG_TCS_SHOW_QUARTER_DESCRIPTION = true;
-	const CONFIG_TCS_BUILDING_FLEX_DISPLAY_MODE = 'ROW'; // 'ROW' or 'COLUMN'
+	const CONFIG_TCS_SHOW_POTENTIAL_IMPROVEMENT = (TCS_ShowPotentialImprovement.Option == true) ? true : false;
+	const CONFIG_TCS_SHOW_QUARTER_DESCRIPTION = (TCS_ShowQuarterDescription.Option == true) ? true : false;
+	const CONFIG_TCS_BUILDING_FLEX_DISPLAY_MODE = (TCS_BuildingFlexDisplayMode.Option == true) ? 'ROW' : 'COLUMN';
 	const CONFIG_TCS_BUILDING_TAGS_DISPLAY_MODE = 'TEXT'; // 'TEXT' or 'ICONS', doesn't actually do anything yet
-	const CONFIG_TCS_SHOW_PLAYER_RELATIONSHIP = true;
-	const CONFIG_TCS_SHOW_COORDINATES = false;
-	const CONFIG_TCS_DEBUG_MODE = false;
+	const CONFIG_TCS_SHOW_PLAYER_RELATIONSHIP = (TCS_ShowPlayerRelationship.Option == true) ? true : false;
+	const CONFIG_TCS_SHOW_COORDINATES = (TCS_ShowCoordinates.Option == true) ? true : false;
+	const CONFIG_TCS_DEBUG_MODE = (TCS_EnableDebugMode.Option == true) ? true : false;
 
 	console.warn("----------------------------------");
 	console.warn("TCS IMPROVED PLOT TOOLTIP (TCS-IPT) - LOADED");
@@ -31,7 +33,7 @@
 	console.warn("   CONFIG_TCS_SHOW_POTENTIAL_IMPROVEMENT = " + CONFIG_TCS_SHOW_POTENTIAL_IMPROVEMENT);
 	console.warn("   CONFIG_TCS_SHOW_QUARTER_DESCRIPTION = " + CONFIG_TCS_SHOW_QUARTER_DESCRIPTION);
 	console.warn("   CONFIG_TCS_BUILDING_FLEX_DISPLAY_MODE = " + CONFIG_TCS_BUILDING_FLEX_DISPLAY_MODE);
-	console.warn("   CONFIG_TCS_BUILDING_TAGS_DISPLAY_MODE = " + CONFIG_TCS_BUILDING_TAGS_DISPLAY_MODE);
+	//console.warn("   CONFIG_TCS_BUILDING_TAGS_DISPLAY_MODE = " + CONFIG_TCS_BUILDING_TAGS_DISPLAY_MODE);
 	console.warn("   CONFIG_TCS_SHOW_PLAYER_RELATIONSHIP = " + CONFIG_TCS_SHOW_PLAYER_RELATIONSHIP);
 	console.warn("   CONFIG_TCS_SHOW_COORDINATES = " + CONFIG_TCS_SHOW_COORDINATES);
 	console.warn("   CONFIG_TCS_DEBUG_MODE = " + CONFIG_TCS_DEBUG_MODE);
@@ -760,10 +762,11 @@
 			
 			// Potential improvements
 			const potentialImprovements = plotObject.PotentialImprovements;
-			if (improvements.length == 0 && buildings.length == 0 && wonders.length == 0 && plotObject.PotentialImprovements.length > 0) {
+			if (CONFIG_TCS_SHOW_POTENTIAL_IMPROVEMENT == true && improvements.length == 0 && buildings.length == 0 && wonders.length == 0 && plotObject.PotentialImprovements.length > 0) {
 				potentialImprovements.sort((a,b) => (a.Name > b.Name) ? 1 : ((b.Name > a.Name) ? -1 : 0));
 				
 				const plotTooltipImprovementContainer = this.addElement_SectionContainer(TCS_CONSTRUCTIBLE_CONTAINER_PROPERTIES);
+				plotTooltipImprovementContainer?.style.removeProperty('width');
 				
 				potentialImprovements.forEach((item) => {
 								
@@ -772,7 +775,7 @@
 						[
 							['justify-content', 'center'],
 							['align-content', 'center'],
-							//['width', '75%'],
+							//['max-width', '75%'],
 							['padding', '0.25rem']
 						]);
 					
@@ -801,9 +804,11 @@
 				const plotTooltipImprovementContainer = this.addElement_SectionContainer(
 					[
 						['justify-content', 'center'],
-						['align-content', 'flex-start'],
+						['align-content', 'center'],
+						//['max-width', '75%'],
 						['padding', '0.25rem']
 					]);
+				plotTooltipImprovementContainer?.style.removeProperty('width');
 				
 				improvements.forEach((item) => {
 					
@@ -822,7 +827,6 @@
 						[
 							['justify-content', 'center'],
 							['align-content', 'center'],
-							['max-width', '75%'],
 							['padding', '0.25rem']
 						]);
 					
@@ -871,6 +875,7 @@
 				}
 				if (CONFIG_TCS_BUILDING_FLEX_DISPLAY_MODE == 'COLUMN') {
 					plotTooltipBuildingsContainer?.style.setProperty('flex-direction', 'column');
+					//plotTooltipBuildingsContainer?.style.setProperty('justify-content', 'flex-start');
 					plotTooltipBuildingsContainer?.style.removeProperty('width');
 					plotTooltipBuildingsContainer?.style.setProperty('max-width', '100%');	
 				}
@@ -907,6 +912,9 @@
 						]);
 					if (buildings.length > 1 && CONFIG_TCS_BUILDING_FLEX_DISPLAY_MODE == 'ROW') {
 						plotTooltipSubContainer?.style.setProperty('max-width', '50%');
+					}
+					if (CONFIG_TCS_BUILDING_FLEX_DISPLAY_MODE == 'COLUMN') {
+						plotTooltipSubContainer?.style.setProperty('justify-content', 'flex-start');
 					}
 					
 					// Icon
@@ -1438,31 +1446,41 @@
 			}
 		}
 		addDebugInfo(plotObject) {
-			if (this.isShowingDebug) {
+			if (CONFIG_TCS_DEBUG_MODE) {
 				const tooltipDebugFlexbox = document.createElement("div");
-				tooltipDebugFlexbox.classList.add("plot-tooltip__debug-flexbox");
+				tooltipDebugFlexbox.classList.add("plot-tooltip__debug-flexbox", "text-2xs", "text-center");
+
+				const toolTipDebugTitle = this.addElement_Title("LOC_PLOT_TOOLTIP_DEBUG_TITLE");
+
+				tooltipDebugFlexbox.appendChild(this.addElement_Text('XY: ' + plotObject.x + ', ' + plotObject.y));
+				tooltipDebugFlexbox.appendChild(this.addElement_Text('PlotIndex: ' + plotObject.PlotIndex));
+				if (plotObject.Biome) {tooltipDebugFlexbox.appendChild(this.addElement_Text('Biome: ' + plotObject.Biome.BiomeType));}
+				tooltipDebugFlexbox.appendChild(this.addElement_Text('Terrain: ' + plotObject.Terrain.TerrainType));
+				if (plotObject.Terrain) {
+					if (plotObject.Terrain.TerrainType == "TERRAIN_COAST" && GameplayMap.isLake(plotObject.x, plotObject.y)) {
+							tooltipDebugFlexbox.appendChild(this.addElement_Text('Lake: true'));
+					}
+				}
+				if (plotObject.Feature) {tooltipDebugFlexbox.appendChild(this.addElement_Text('Feature: ' + plotObject.Feature.FeatureType));}
+				if (plotObject.RiverType > -1) {tooltipDebugFlexbox.appendChild(this.addElement_Text('RiverType: ' + ((plotObject.RiverType == RiverTypes.RIVER_NAVIGABLE) ? 'RiverTypes.RIVER_NAVIGABLE' : 'RiverTypes.RIVER_MINOR')));}
+				if (plotObject.Resource) {tooltipDebugFlexbox.appendChild(this.addElement_Text('Resource: ' + plotObject.Resource.ResourceType));}
+				if (plotObject.OwningPlayerID) {tooltipDebugFlexbox.appendChild(this.addElement_Text('OwningPlayerID: ' + plotObject.OwningPlayerID));}
+				if (plotObject.OwningPlayer) {tooltipDebugFlexbox.appendChild(this.addElement_Text('OwningPlayer: ' + plotObject.OwningPlayer.name));}
+				//tooltipDebugFlexbox.appendChild(this.addElement_Text('LocalPlayer: ' + plotObject.LocalPlayer.name));
+				if (plotObject.District) {
+					if (plotObject.District.type == DistrictTypes.RURAL) {tooltipDebugFlexbox.appendChild(this.addElement_Text('District.type: DistrictTypes.RURAL'));}
+					else if (plotObject.District.type == DistrictTypes.URBAN) {tooltipDebugFlexbox.appendChild(this.addElement_Text('District.type: DistrictTypes.URBAN'));}
+					else if (plotObject.District.type == DistrictTypes.CITY_CENTER) {tooltipDebugFlexbox.appendChild(this.addElement_Text('District.type: DistrictTypes.CITY_CENTER'));}
+					else if (plotObject.District.type == DistrictTypes.WONDER) {tooltipDebugFlexbox.appendChild(this.addElement_Text('District.type: DistrictTypes.WONDER'));}
+					else {tooltipDebugFlexbox.appendChild(this.addElement_Text('District.type: none'));}
+				}
+				if (plotObject.City) {tooltipDebugFlexbox.appendChild(this.addElement_Text('City: ' + plotObject.City.name));}
+				//tooltipDebugFlexbox.appendChild(this.addElement_Text('Unit Count: ' + plotObject.Units.length));
+				//tooltipDebugFlexbox.appendChild(this.addElement_Text('Constructible Count: ' + plotObject.Constructibles.length));
+				if (plotObject.PotentialImprovements.length > 0) {tooltipDebugFlexbox.appendChild(this.addElement_Text('DefaultImprovement: ' + plotObject.PotentialImprovements[0].ConstructibleType));}
+				
+				this.container.appendChild(toolTipDebugTitle);
 				this.container.appendChild(tooltipDebugFlexbox);
-				const playerID = plotObject.OwningPlayerID;
-				const currHp = Players.Districts.get(playerID)?.getDistrictHealth(this.plotCoord);
-				const maxHp = Players.Districts.get(playerID)?.getDistrictMaxHealth(this.plotCoord);
-				const toolTipDebugTitle = document.createElement("div");
-				toolTipDebugTitle.classList.add("plot-tooltip__debug-title-text");
-				if ((currHp != undefined && currHp != 0) && (maxHp != undefined && maxHp != 0)) {
-					toolTipDebugTitle.innerHTML = Locale.compose("LOC_PLOT_TOOLTIP_DEBUG_TITLE") + ": " + currHp + " / " + maxHp;
-					tooltipDebugFlexbox.appendChild(toolTipDebugTitle);
-				}
-				else {
-					toolTipDebugTitle.innerHTML = Locale.compose("LOC_PLOT_TOOLTIP_DEBUG_TITLE") + ":";
-					tooltipDebugFlexbox.appendChild(toolTipDebugTitle);
-				}
-				const toolTipDebugPlotCoord = document.createElement("div");
-				toolTipDebugPlotCoord.classList.add("plot-tooltip__coordinate-text");
-				toolTipDebugPlotCoord.innerHTML = Locale.compose("LOC_PLOT_TOOLTIP_PLOT") + `: (${this.plotCoord.x},${this.plotCoord.y})`;
-				tooltipDebugFlexbox.appendChild(toolTipDebugPlotCoord);
-				const toolTipDebugPlotIndex = document.createElement("div");
-				toolTipDebugPlotIndex.classList.add("plot-tooltip__coordinate-text");
-				toolTipDebugPlotIndex.innerHTML = Locale.compose("LOC_PLOT_TOOLTIP_INDEX") + `: ${plotIndex}`;
-				tooltipDebugFlexbox.appendChild(toolTipDebugPlotIndex);
 			}
 		}
 		
@@ -1531,7 +1549,7 @@
 			
 			// If no constructibles, get potential improvement array
 			const potentialImprovements = [];
-			if (CONFIG_TCS_SHOW_POTENTIAL_IMPROVEMENT == true && !constructibles || constructibles.length == 0) {
+			if (!constructibles || constructibles.length == 0) {
 				if (resource && potentialImprovements.length == 0) {
 					const infos = GameInfo.District_FreeConstructibles.filter(item => (item.ResourceType && item.ResourceType == resource.ResourceType));
 					if (infos) {
@@ -1678,26 +1696,16 @@
 			const biome = plotObject.Biome;
 			// Do not show a label if marine biome.
 			if (biome && biome.BiomeType != "BIOME_MARINE") {
-				if (this.isShowingDebug) {return Locale.compose('{1_Name} ({2_Value})', biome.Name, biome.BiomeType.toString());}
-				else {return biome.Name;}
+				return biome.Name;
 			}
 			else {return "";}
 		}
 		getTerrainLabel(plotObject) {
 			const terrain = plotObject.Terrain;
 			if (terrain) {
-				if (this.isShowingDebug) {
-					// despite being "coast" this is a check for a lake
-					if (terrain.TerrainType == "TERRAIN_COAST" && GameplayMap.isLake(plotObject.x, plotObject.y)) {
-						return Locale.compose('{1_Name} ({2_Value})', "LOC_TERRAIN_LAKE_NAME", terrain.TerrainType.toString());
-					}
-					return Locale.compose('{1_Name} ({2_Value})', terrain.Name, terrain.TerrainType.toString());
-				}
-				else {
-					// despite being "coast" this is a check for a lake
-					if (terrain.TerrainType == "TERRAIN_COAST" && GameplayMap.isLake(plotObject.x, plotObject.y)) {return "LOC_TERRAIN_LAKE_NAME";}
-					return terrain.Name;
-				}
+				// despite being "coast" this is a check for a lake
+				if (terrain.TerrainType == "TERRAIN_COAST" && GameplayMap.isLake(plotObject.x, plotObject.y)) {return "LOC_TERRAIN_LAKE_NAME";}
+				return terrain.Name;
 			}
 			else {return "";}
 		}	
