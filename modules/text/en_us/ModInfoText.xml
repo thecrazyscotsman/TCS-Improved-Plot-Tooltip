@@ -7,5 +7,53 @@
 		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_DESCRIPTION">
 			<Text>Various improvements to the plot tooltip.</Text>
 		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_COMPATIBILITY">
+			<Text>Compatible with [B]Sukritact's Simple UI Adjustments[/B], incompatible with other mods which change the plot tooltip.</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_THANKS">
+			<Text>leonardify, Webrok, fulfom, thendye, alwdark, Klajwert, Messiah360, Fampat, Gusjeon from Civfanatics for localization contributions.[N]leonardify and beezany from CivFanatics for code assistance.</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_URL">
+			<Text>https://forums.civfanatics.com/resources/tcs-improved-plot-tooltip.31859/</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_GROUP_TCS_IMPROVED_PLOT_TOOLTIP">
+			<Text>TCS Improved Plot Tooltip</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_POTENTIAL_IMPROVEMENT_LABEL">
+			<Text>Show Potential Improvement</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_POTENTIAL_IMPROVEMENT_DESCRIPTION">
+			<Text>Toggle whether plot tooltip shows the default improvement on unimproved tiles.</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_QUARTER_DESCRIPTION_LABEL">
+			<Text>Show Quarter Description</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_QUARTER_DESCRIPTION_DESCRIPTION">
+			<Text>Toggle whether plot tooltip shows a description for Unique Quarters.</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_BUILDING_DISPLAY_MODE_LABEL">
+			<Text>Building Display in Row</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_BUILDING_DISPLAY_MODE_DESCRIPTION">
+			<Text>Toggle whether plot tooltip displays Buildings as a Row or a Column. Row is recommended.</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_PLAYER_RELATIONSHIP_LABEL">
+			<Text>Show Player Relationship</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_PLAYER_RELATIONSHIP_DESCRIPTION">
+			<Text>Toggle whether plot tooltip shows the player relationship when hovering over their territory.</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_COORDINATES_LABEL">
+			<Text>Show Plot Coordinates</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_COORDINATES_DESCRIPTION">
+			<Text>Toggle whether plot tooltip shows the plot XY coordinates.</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_ENABLE_DEBUG_LABEL">
+			<Text>Enable Debug Info</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_ENABLE_DEBUG_DESCRIPTION">
+			<Text>Toggle whether plot tooltip shows additional Debug information.</Text>
+		</Row>
 	</EnglishText>
 </Database>
