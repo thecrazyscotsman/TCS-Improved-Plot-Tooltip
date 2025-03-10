@@ -37,6 +37,7 @@ When examining one of your City Center tiles:
  * If it is a Town, it displays whether it's a Growing or Specialized Town and (if Specialized) how many Cities are being fed
  * Displays City/Town connections (including a food icon for Cities/Towns being fed/feeding the root city)
  * Displays a warning if the settlement is not part of the Trade Network
+
 When examining another player's City Center tiles:
  * Displays how many current/available trade routes you have with that player
 
