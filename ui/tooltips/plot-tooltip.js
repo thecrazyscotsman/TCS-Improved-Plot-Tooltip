@@ -766,7 +766,6 @@
 				potentialImprovements.sort((a,b) => (a.Name > b.Name) ? 1 : ((b.Name > a.Name) ? -1 : 0));
 				
 				const plotTooltipImprovementContainer = this.addElement_SectionContainer(TCS_CONSTRUCTIBLE_CONTAINER_PROPERTIES);
-				plotTooltipImprovementContainer?.style.removeProperty('width');
 				
 				potentialImprovements.forEach((item) => {
 								
