@@ -47,6 +47,9 @@ You may toggle certain components if you find the information unnecessary. Optio
 ![1741572517921](https://github.com/user-attachments/assets/b3e980a6-c38b-4b32-a2f7-814b60d79010)
 
 ## Installation
+### Recommended
+It is recommended to use the ![CivMods](https://civmods.com/) manager.
+### Manual
 Extract to your Mods folder.
 * **Windows:** %localappdata%\Firaxis Games\Sid Meier's Civilization VII\Mods
 * **MacOS:** ~/Library/Application Support/Civilization VII/Mods
