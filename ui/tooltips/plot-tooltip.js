@@ -178,6 +178,8 @@
 			this.yieldsFlexbox = document.createElement('div');
 			this.tooltip.classList.add('plot-tooltip', 'max-w-96');
 			this.tooltip.appendChild(this.container);
+			this.shiftKey = false;
+			this.minimizeTooltip = false;
 
 			// User config related-items
 			this.updateQueued = false;
@@ -215,6 +217,16 @@
 				}
 			}
 			this.plotCoord = plotCoord; // May be cleaner to recompute in update but at cost of computing 2nd time.
+
+			// Check if the Shift key is pressed (to minimize the tooltip)
+			// Code borrowed from @beezany/@trixie. Thank you!
+			const shiftKey = Input.isShiftDown();
+			const minimizeTooltip = shiftKey;
+			if (shiftKey != this.shiftKey || minimizeTooltip != this.minimizeTooltip) {
+				this.shiftKey = shiftKey;
+				this.minimizeTooltip = minimizeTooltip;
+				return true;
+			}
 			return true;
 		}
 		reset() {
@@ -223,6 +235,7 @@
 			this.plotObject = null;
 		}
 		update() {
+
 			if (this.plotCoord == null) {
 				console.error("Tooltip was unable to read plot values due to a coordinate error.");
 				return;
@@ -237,17 +250,21 @@
 			//---------------------
 			// Construct Tooltip
 			//---------------------
-							
-			// PRIORITY OVERRIDE: Settler Lens
-			this.addSettlerOverride(this.plotObject);
-	
-			// SECTION: Biome & Terrain
-			this.addBiomeTerrain(this.plotObject);
 			
-			// SECTION: Feature
-			const feature = this.getFeatureInfo(this.plotObject);
-			if (feature && !feature.plotIsNaturalWonder) {this.addFeatureRiver(this.plotObject);}
+			let feature; //needs to be initialized outside if-thens
+
+			if (!this.minimizeTooltip) {
+				// PRIORITY OVERRIDE: Settler Lens
+				this.addSettlerOverride(this.plotObject);
+		
+				// SECTION: Biome & Terrain
+				this.addBiomeTerrain(this.plotObject);
 				
+				// SECTION: Feature
+				feature = this.getFeatureInfo(this.plotObject);
+				if (feature && !feature.plotIsNaturalWonder) {this.addFeatureRiver(this.plotObject);}
+			}
+							
 			// SECTION: Yields
 			this.yieldsFlexbox.classList.add("plot-tooltip__resourcesFlex");
 			this.container.appendChild(this.yieldsFlexbox);
@@ -255,23 +272,25 @@
 			
 			// SECTION: Constructibles
 			this.addConstructibles(this.plotObject);
-			
-			// SECTION: Natural Wonder
-			if (feature && feature.plotIsNaturalWonder) {this.addFeatureRiver(this.plotObject);}
 
-			// SECTION: Resource
-			this.addResource(this.plotObject);
+			if (!this.minimizeTooltip) {	
+				// SECTION: Natural Wonder
+				if (feature && feature.plotIsNaturalWonder) {this.addFeatureRiver(this.plotObject);}
+
+				// SECTION: Resource
+				this.addResource(this.plotObject);
+				
+				// SECTION: City & Owner
+				this.addCityOwnerInfo(this.plotObject);
+				
+				// SECTION: Units
+				this.addUnitInfo(this.plotObject);
 			
-			// SECTION: City & Owner
-			this.addCityOwnerInfo(this.plotObject);
-			
-			// SECTION: Units
-			this.addUnitInfo(this.plotObject);
-		   
-			// SECTION: More Info
-			// Continent & Route
-			// Plot Effects
-			this.addMoreInfo(this.plotObject);
+				// SECTION: More Info
+				// Continent & Route
+				// Plot Effects
+				this.addMoreInfo(this.plotObject);
+			}
 			
 			UI.setPlotLocation(this.plotCoord.x, this.plotCoord.y, this.plotObject.PlotIndex);
 			// Adjust cursor between normal and red based on the plot owner's hostility
@@ -335,7 +354,7 @@
 			}
 			
 			//debug info
-			this.addDebugInfo(this.plotObject);
+			if (!this.minimizeTooltip) {this.addDebugInfo(this.plotObject);}
 		}
 		
 		//---------------------
@@ -552,7 +571,8 @@
 			if (hexResource) {
 				
 				// Resource name
-				this.container.appendChild(this.addElement_Title(Locale.compose(hexResource.Name)));
+				const nameString = "[icon:" + hexResource.ResourceClassType + "] " + Locale.compose(hexResource.Name);
+				this.container.appendChild(this.addElement_Title(Locale.stylize(nameString)));
 				
 				// Resource icon and tooltip	
 				const toolTipResourceContainer = document.createElement('div');
@@ -763,27 +783,31 @@
 			// Potential improvements
 			const potentialImprovements = plotObject.PotentialImprovements;
 			if (this.isShowingPotentialImprovement == true && improvements.length == 0 && buildings.length == 0 && wonders.length == 0 && plotObject.PotentialImprovements.length > 0) {
-				potentialImprovements.sort((a,b) => (a.Name > b.Name) ? 1 : ((b.Name > a.Name) ? -1 : 0));
+				potentialImprovements.sort((a,b) => (Locale.compose(a.Name) > Locale.compose(b.Name)) ? 1 : ((Locale.compose(b.Name) > Locale.compose(a.Name)) ? -1 : 0));
 				
 				const plotTooltipImprovementContainer = this.addElement_SectionContainer(TCS_CONSTRUCTIBLE_CONTAINER_PROPERTIES);
+				plotTooltipImprovementContainer?.style.setProperty('justify-content', 'center');
+				plotTooltipImprovementContainer?.style.setProperty('align-content', 'center');
+				
+				// Sub Container
+				const plotTooltipImprovementSubContainer = this.addElement_SectionContainer(
+					[
+						['align-content', 'flex-start'],
+						['max-width', '100%'],
+					]);
+				plotTooltipImprovementSubContainer?.style.setProperty('flex-direction', 'column');
+				plotTooltipImprovementSubContainer?.style.setProperty('justify-content', 'center');
+				plotTooltipImprovementSubContainer?.style.removeProperty('width');
+				plotTooltipImprovementContainer.appendChild(plotTooltipImprovementSubContainer);
 				
 				potentialImprovements.forEach((item) => {
-								
-					// Sub Container
 					const plotTooltipSubContainer = this.addElement_SectionContainer(
 						[
-							['justify-content', 'center'],
-							['align-content', 'center'],
-							['max-width', '100%'],
-							['padding-top', '0.125rem'],
-							['padding-bottom', '0.125rem'],
+							['justify-content', 'flex-start'],
+							['align-content', 'flex-start'],
+							//['background-color', 'rgb(0, 91, 188)'], //debugging
 						]);
-					
-					if (potentialImprovements.length > 1) {
-						plotTooltipSubContainer?.style.setProperty('width', '50%');
-					}
-					else {plotTooltipSubContainer?.style.removeProperty('width');}
-					
+
 					// Icon
 					const toolTipImprovementIcon = this.addElement_ConstructibleIcon(item, [['opacity', '0.35']]);
 					
@@ -797,7 +821,7 @@
 
 					plotTooltipSubContainer.appendChild(toolTipImprovementIcon);
 					plotTooltipSubContainer.appendChild(plotTooltipImprovementElement);
-					plotTooltipImprovementContainer.appendChild(plotTooltipSubContainer);
+					plotTooltipImprovementSubContainer.appendChild(plotTooltipSubContainer);
 				});
 				this.container.appendChild(plotTooltipImprovementContainer);
 			}
@@ -1503,7 +1527,12 @@
 				if (plotObject.City) {tooltipDebugFlexbox.appendChild(this.addElement_Text('City: ' + plotObject.City.name));}
 				//tooltipDebugFlexbox.appendChild(this.addElement_Text('Unit Count: ' + plotObject.Units.length));
 				//tooltipDebugFlexbox.appendChild(this.addElement_Text('Constructible Count: ' + plotObject.Constructibles.length));
-				if (plotObject.PotentialImprovements.length > 0) {tooltipDebugFlexbox.appendChild(this.addElement_Text('DefaultImprovement: ' + plotObject.PotentialImprovements[0].ConstructibleType));}
+				if (plotObject.PotentialImprovements.length > 0) {
+					plotObject.PotentialImprovements.forEach(i => {
+						tooltipDebugFlexbox.appendChild(this.addElement_Text('PotentialImprovement: ' + i.ConstructibleType));
+					});
+					
+				}
 				
 				this.container.appendChild(toolTipDebugTitle);
 				this.container.appendChild(tooltipDebugFlexbox);
@@ -1540,6 +1569,11 @@
 			const localPlayerID = GameContext.localPlayerID;
 			const localPlayer = Players.get(localPlayerID);
 			const localPlayerDiplomacy = localPlayer?.Diplomacy;  
+			const localPlayerCivType = GameInfo.Civilizations.lookup(localPlayer.civilizationType).CivilizationType;
+			const localPlayerCivTraits = []; // Populated with TraitTypes just below
+			GameInfo.CivilizationTraits.filter(t => t.CivilizationType == localPlayerCivType).forEach(t => {
+				localPlayerCivTraits.push(t.TraitType);
+			});
 			
 			// Get owning player info
 			const owningPlayerID = GameplayMap.getOwner(plotCoordinate.x, plotCoordinate.y);
@@ -1576,49 +1610,103 @@
 			// If no constructibles, get potential improvement array
 			const potentialImprovements = [];
 			if (!constructibles || constructibles.length == 0) {
+
+				// Get local player unique improvements - we will check if it is a valid potential improvement later
+				const localPlayerUniqueImprovements = GameInfo.Improvements.filter(i => localPlayerCivTraits.includes(i.TraitType));
+				const addedImprovementTypes = [];
+
 				if (resource && potentialImprovements.length == 0) {
+					// Get "default" improvement for tile
 					const infos = GameInfo.District_FreeConstructibles.filter(item => (item.ResourceType && item.ResourceType == resource.ResourceType));
 					if (infos) {
 						for (const info of infos) {
 							const constructible = GameInfo.Constructibles.find(item => (item.ConstructibleType == info.ConstructibleType));
-							if (!constructible.Age || Database.makeHash(constructible?.Age ?? "") == Game.age) {
+							if (!addedImprovementTypes.includes(constructible.ConstructibleType) && (!constructible.Age || Database.makeHash(constructible?.Age ?? "") == Game.age)) {
 								potentialImprovements.push(constructible);
+								addedImprovementTypes.push(constructible.ConstructibleType);
 							}
 						}
-					}
+					}	
 				}
 				if (feature && potentialImprovements.length == 0) {
+					// Get "default" improvement for tile
 					const infos = GameInfo.District_FreeConstructibles.filter(item => (item.FeatureType == feature.FeatureType));
 					if (infos) {
 						for (const info of infos) {
 							const constructible = GameInfo.Constructibles.find(item => (item.ConstructibleType == info.ConstructibleType));
-							if (!constructible.Age || Database.makeHash(constructible?.Age ?? "") == Game.age) {
+							if (!addedImprovementTypes.includes(constructible.ConstructibleType) && (!constructible.Age || Database.makeHash(constructible?.Age ?? "") == Game.age)) {
 								potentialImprovements.push(constructible);
+								addedImprovementTypes.push(constructible.ConstructibleType);
 							}
 						}
 					}
 				}
 				if (riverType && riverType == RiverTypes.RIVER_NAVIGABLE && potentialImprovements.length == 0) {
+					// Get "default" improvement for tile
 					const infos = GameInfo.District_FreeConstructibles.filter(item => (item.RiverType == "RIVER_NAVIGABLE"));
 					if (infos) {
 						for (const info of infos) {
 							const constructible = GameInfo.Constructibles.find(item => (item.ConstructibleType == info.ConstructibleType));
-							if (!constructible.Age || Database.makeHash(constructible?.Age ?? "") == Game.age) {
+							if (!addedImprovementTypes.includes(constructible.ConstructibleType) && (!constructible.Age || Database.makeHash(constructible?.Age ?? "") == Game.age)) {
 								potentialImprovements.push(constructible);
+								addedImprovementTypes.push(constructible.ConstructibleType);
 							}
 						}
 					}
 				}
 				if (terrain && potentialImprovements.length == 0) {
+					// Get "default" improvement for tile
 					const infos = GameInfo.District_FreeConstructibles.filter(item => (item.TerrainType == terrain.TerrainType));
 					if (infos) {
 						for (const info of infos) {
 							const constructible = GameInfo.Constructibles.find(item => (item.ConstructibleType == info.ConstructibleType));
-							if (!constructible.Age || Database.makeHash(constructible?.Age ?? "") == Game.age) {
+							if (!addedImprovementTypes.includes(constructible.ConstructibleType) && (!constructible.Age || Database.makeHash(constructible?.Age ?? "") == Game.age)) {
 								potentialImprovements.push(constructible);
+								addedImprovementTypes.push(constructible.ConstructibleType);
 							}
 						}
-					}
+					}	
+				}
+
+				// Get civ unique improvement for this tile
+				if (localPlayerUniqueImprovements) {
+					localPlayerUniqueImprovements.forEach(i => {
+						const validTerrains = GameInfo.Constructible_ValidTerrains.filter(c => c.ConstructibleType == i.ConstructibleType);
+						const validFeatures = GameInfo.Constructible_ValidFeatures.filter(c => c.ConstructibleType == i.ConstructibleType);
+						const validResources = GameInfo.Constructible_ValidResources.filter(c => c.ConstructibleType == i.ConstructibleType);
+						if (resource && validResources) {
+							for (const r of validResources) {
+								if (!addedImprovementTypes.includes(i.ConstructibleType) && r.ResourceType == resource.ResourceType) {
+									const constructible = GameInfo.Constructibles.find(item => (item.ConstructibleType == i.ConstructibleType));
+									potentialImprovements.push(constructible);
+									addedImprovementTypes.push(construitible.ConstructibleType);
+									break;
+								}
+							}
+						}
+						else if (feature && validFeatures) {
+							for (const f of validFeatures) {
+								if (!addedImprovementTypes.includes(i.ConstructibleType) && f.FeatureType == feature.FeatureType) {
+									const constructible = GameInfo.Constructibles.find(item => (item.ConstructibleType == i.ConstructibleType));
+									potentialImprovements.push(constructible);
+									addedImprovementTypes.push(i.ConstructibleType);
+									break;
+								}
+							}
+						}
+						else if (terrain && !resource) {
+							if (validTerrains) {
+								for (const t of validTerrains) {
+									if (!addedImprovementTypes.includes(i.ConstructibleType) && t.TerrainType == terrain.TerrainType) {
+										const constructible = GameInfo.Constructibles.find(item => (item.ConstructibleType == i.ConstructibleType));
+										potentialImprovements.push(constructible);
+										addedImprovementTypes.push(i.ConstructibleType);
+										break;
+									}
+								}
+							}	
+						}
+					});
 				}
 			}		
 			

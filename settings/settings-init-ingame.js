@@ -1,11 +1,14 @@
-import { Options, OptionType } from '/core/ui/options/model-options.js';
-import { CategoryType } from '/core/ui/options/options-helpers.js';
-import { TCS_ShowPotentialImprovement, TCS_ShowQuarterDescription, TCS_BuildingFlexDisplayMode, TCS_ShowPlayerRelationship, TCS_ShowCoordinates, TCS_EnableDebugMode } from 'fs://game/tcs-ui-improved-plot-tooltip/settings/settings.js';
-
-// We add a dependency on the Options module to ensure default options are loaded before we add our own
 import '/core/ui/options/options.js';
-
+import { Options, OptionType } from '/core/ui/options/model-options.js';
+import { CategoryData, CategoryType } from '/core/ui/options/options-helpers.js';
+import { TCS_ShowPotentialImprovement, TCS_ShowQuarterDescription, TCS_BuildingFlexDisplayMode, TCS_ShowPlayerRelationship, TCS_ShowCoordinates, TCS_EnableDebugMode } from 'fs://game/tcs-ui-improved-plot-tooltip/settings/settings.js';
 import { UpdateTCSPlotTooltipEvent } from '/base-standard/ui/tooltips/plot-tooltip.js';
+
+CategoryType["Mods"] = "mods";
+CategoryData[CategoryType.Mods] = {
+    title: "LOC_UI_CONTENT_MGR_SUBTITLE",
+    description: "LOC_UI_CONTENT_MGR_SUBTITLE_DESCRIPTION",
+};
 
 // Option: Show Potential Improvement
 const onTCS_ShowPotentialImprovementSettingsInit = (optionInfo) => {
@@ -17,7 +20,7 @@ const onTCS_ShowPotentialImprovementSettingsUpdate = (optionInfo, value) => {
 };
 Options.addInitCallback(() => {
     Options.addOption({ 
-        category: CategoryType.System, 
+        category: CategoryType.Mods, 
         // @ts-ignore
         group: 'TCS_IMPROVED_PLOT_TOOLTIP', 
         type: OptionType.Checkbox, 
@@ -40,7 +43,7 @@ const onTCS_ShowPlayerRelationshipSettingsUpdate = (optionInfo, value) => {
 };
 Options.addInitCallback(() => {
     Options.addOption({ 
-        category: CategoryType.System, 
+        category: CategoryType.Mods, 
         // @ts-ignore
         group: 'TCS_IMPROVED_PLOT_TOOLTIP', 
         type: OptionType.Checkbox, 
@@ -63,7 +66,7 @@ const onTCS_ShowQuarterDescriptionSettingsUpdate = (optionInfo, value) => {
 };
 Options.addInitCallback(() => {
     Options.addOption({ 
-        category: CategoryType.System, 
+        category: CategoryType.Mods, 
         // @ts-ignore
         group: 'TCS_IMPROVED_PLOT_TOOLTIP', 
         type: OptionType.Checkbox, 
@@ -88,7 +91,7 @@ const onTCS_BuildingFlexDisplayModeSettingsUpdate = (optionInfo, value) => {
 
 Options.addInitCallback(() => {
     Options.addOption({ 
-        category: CategoryType.System, 
+        category: CategoryType.Mods, 
         // @ts-ignore
         group: 'TCS_IMPROVED_PLOT_TOOLTIP', 
         type: OptionType.Checkbox,
@@ -111,7 +114,7 @@ const onTCS_ShowCoordinatesSettingsUpdate = (optionInfo, value) => {
 };
 Options.addInitCallback(() => {
     Options.addOption({ 
-        category: CategoryType.System, 
+        category: CategoryType.Mods, 
         // @ts-ignore
         group: 'TCS_IMPROVED_PLOT_TOOLTIP', 
         type: OptionType.Checkbox, 
@@ -134,7 +137,7 @@ const onTCS_EnableDebugModeSettingsUpdate = (optionInfo, value) => {
 };
 Options.addInitCallback(() => {
     Options.addOption({ 
-        category: CategoryType.System, 
+        category: CategoryType.Mods, 
         // @ts-ignore
         group: 'TCS_IMPROVED_PLOT_TOOLTIP', 
         type: OptionType.Checkbox, 

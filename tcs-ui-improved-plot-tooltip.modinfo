@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Mod id="tcs-ui-improved-plot-tooltip" version="17"
+<Mod id="tcs-ui-improved-plot-tooltip" version="18"
 	xmlns="ModInfo">
 	<Properties>
 		<Name>LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_NAME</Name>
@@ -10,7 +10,7 @@
 		<SpecialThanks>LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_THANKS</SpecialThanks>
 		<Compatibility>LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_COMPATIBILITY</Compatibility>
 		<URL>LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_URL</URL>
-		<Version>17</Version>
+		<Version>18</Version>
 	</Properties>
 	<Dependencies>
 		<Mod id="base-standard" title="LOC_MODULE_BASE_STANDARD_NAME" />
