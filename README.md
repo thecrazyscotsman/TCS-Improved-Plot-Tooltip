@@ -42,9 +42,9 @@ When examining another player's City Center tiles:
  * Displays how many current/available trade routes you have with that player
 
 ## User Configuration
-You may toggle certain components if you find the information unnecessary. Options may be toggled in **Options** > **System**, and can be selected in-game for an immediate change.
+You may toggle certain components if you find the information unnecessary. Options may be toggled in **Options** > **Add-Ons**, and can be selected in-game for an immediate change.
 
-![1741572517921](https://github.com/user-attachments/assets/b3e980a6-c38b-4b32-a2f7-814b60d79010)
+![image](https://github.com/user-attachments/assets/4fd97d6e-cdf6-416b-9563-290729c28941)
 
 ## Installation
 ### Recommended
