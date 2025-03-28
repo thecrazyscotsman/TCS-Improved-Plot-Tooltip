@@ -1,5 +1,5 @@
 # TCS Improved Plot Tooltip
-Official releases hosted on ![Civfanatics](https://forums.civfanatics.com/resources/tcs-improved-plot-tooltip.31859/).
+Official releases hosted on [Civfanatics](https://forums.civfanatics.com/resources/tcs-improved-plot-tooltip.31859/).
 
 ## Description
 Various improvements to the Plot Tooltip. This includes:
@@ -47,6 +47,9 @@ You may toggle certain components if you find the information unnecessary. Optio
 ![1741572517921](https://github.com/user-attachments/assets/b3e980a6-c38b-4b32-a2f7-814b60d79010)
 
 ## Installation
+### Recommended
+It is recommended to use the [CivMods](https://civmods.com/install?modCfId=31859) manager.
+### Manual
 Extract to your Mods folder.
 * **Windows:** %localappdata%\Firaxis Games\Sid Meier's Civilization VII\Mods
 * **MacOS:** ~/Library/Application Support/Civilization VII/Mods
