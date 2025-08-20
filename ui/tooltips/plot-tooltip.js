@@ -7,13 +7,28 @@
  * -------------------------
  * author: thecrazyscotsman
 */
-	import TooltipManager, { PlotTooltipPriority } from '/core/ui/tooltips/tooltip-manager.js';
-	import { ComponentID } from '/core/ui/utilities/utilities-component-id.js';
-	import DistrictHealthManager from '/base-standard/ui/district/district-health-manager.js';
-	import LensManager from '/core/ui/lenses/lens-manager.js';
-	import { TradeRoute } from '/core/ui/utilities/utilities-data.js';
-	import CityDetails, { UpdateCityDetailsEventName } from "/base-standard/ui/city-details/model-city-details.js";
+	import { L as LensManager } from '../../../core/ui/lenses/lens-manager.chunk.js';
+	import TooltipManager, { PlotTooltipPriority } from '../../../core/ui/tooltips/tooltip-manager.js';
+	import { C as ComponentID } from '../../../core/ui/utilities/utilities-component-id.chunk.js';
+	import DistrictHealthManager from '../district/district-health-manager.js';
+	import { C as CityDetails, U as UpdateCityDetailsEventName } from '../production-chooser/production-chooser-helpers.chunk.js';
+	import { T as TradeRoute } from '../../../core/ui/utilities/utilities-data.chunk.js';
 	import { InterfaceMode } from '/core/ui/interface-modes/interface-modes.js';
+	import '../../../core/ui/input/action-handler.js';
+	import '../../../core/ui/framework.chunk.js';
+	import '../../../core/ui/input/cursor.js';
+	import '../../../core/ui/input/focus-manager.js';
+	import '../../../core/ui/views/view-manager.chunk.js';
+	import '../../../core/ui/panel-support.chunk.js';
+	import '../../../core/ui/input/input-support.chunk.js';
+	import '../../../core/ui/input/plot-cursor.js';
+	import '../../../core/ui/context-manager/context-manager.js';
+	import '../../../core/ui/context-manager/display-queue-manager.js';
+	import '../../../core/ui/dialog-box/manager-dialog-box.chunk.js';
+	import '../../../core/ui/context-manager/display-handler.chunk.js';
+	import '../../../core/ui/utilities/utilities-dom.chunk.js';
+	import '../../../core/ui/utilities/utilities-layout.chunk.js';
+	import '../../../core/ui/utilities/utilities-plotcoord.chunk.js';
 
 	import { TCS_ShowPotentialImprovement, TCS_ShowQuarterDescription, TCS_BuildingFlexDisplayMode, TCS_ShowPlayerRelationship, TCS_ShowCoordinates, TCS_EnableDebugMode } from 'fs://game/tcs-ui-improved-plot-tooltip/settings/settings.js';
 
