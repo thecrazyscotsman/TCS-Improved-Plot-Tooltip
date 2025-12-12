@@ -25,7 +25,7 @@
 	import '../../../core/ui/context-manager/context-manager.js';
 	import '../../../core/ui/context-manager/display-queue-manager.js';
 	import '../../../core/ui/dialog-box/manager-dialog-box.chunk.js';
-	import '../../../core/ui/context-manager/display-handler.chunk.js';
+	// import '../../../core/ui/context-manager/display-handler.chunk.js'; //removed for 1.3.1 compatibility
 	import '../../../core/ui/utilities/utilities-dom.chunk.js';
 	import '../../../core/ui/utilities/utilities-layout.chunk.js';
 	import '../../../core/ui/utilities/utilities-plotcoord.chunk.js';
