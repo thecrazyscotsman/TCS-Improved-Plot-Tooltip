@@ -7,5 +7,53 @@
 		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_DESCRIPTION" Language="zh_Hans_CN">
 			<Text>地块详细信息详细信息展示.</Text>
 		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_COMPATIBILITY">
+			<Text>与[B]Sukritact's Simple UI Adjustments[/B]兼容，与其他修改地块提示框的模组不兼容。</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_THANKS">
+			<Text>感谢Civfanatics论坛的leonardify、Webrok、fulfom、thendye、alwdark、Klajwert、Messiah360、Fampat、Gusjeon提供的本地化贡献。[N]感谢CivFanatics论坛的leonardify和beezany提供的代码协助。</Text>
+		</Row>
+		<Row Tag="LOC_MOD_TCS_IMPROVED_PLOT_TOOLTIP_URL">
+			<Text>https://forums.civfanatics.com/resources/tcs-improved-plot-tooltip.31859/</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_GROUP_TCS_IMPROVED_PLOT_TOOLTIP">
+			<Text>地块详细信息</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_POTENTIAL_IMPROVEMENT_LABEL">
+			<Text>显示潜在改良设施</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_POTENTIAL_IMPROVEMENT_DESCRIPTION">
+			<Text>切换是否在地块提示框中显示未改良地块的默认改良设施。</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_QUARTER_DESCRIPTION_LABEL">
+			<Text>显示特色区域描述</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_QUARTER_DESCRIPTION_DESCRIPTION">
+			<Text>切换是否在地块提示框中显示特色区域的描述。</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_BUILDING_DISPLAY_MODE_LABEL">
+			<Text>建筑显示方式(行/列)</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_BUILDING_DISPLAY_MODE_DESCRIPTION">
+			<Text>切换地块提示框中建筑物的显示方式为行或列。推荐使用行显示。</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_PLAYER_RELATIONSHIP_LABEL">
+			<Text>显示玩家关系</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_PLAYER_RELATIONSHIP_DESCRIPTION">
+			<Text>切换当鼠标悬停在玩家领土上时，是否在地块提示框中显示玩家关系。</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_COORDINATES_LABEL">
+			<Text>显示地块坐标</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_SHOW_COORDINATES_DESCRIPTION">
+			<Text>切换是否在地块提示框中显示地块的XY坐标。</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_ENABLE_DEBUG_LABEL">
+			<Text>启用调试信息</Text>
+		</Row>
+		<Row Tag="LOC_OPTIONS_TCS_ENABLE_DEBUG_DESCRIPTION">
+			<Text>切换是否在地块提示框中显示额外的调试信息。</Text>
+		</Row>
 	</LocalizedText>
 </Database>
